@@ -18,7 +18,7 @@ import { Liquidity, LiquidityPoolKeysV4, LiquidityStateV4, Percent, Token, Token
 import { MarketCache, PoolCache, SnipeListCache } from './cache';
 import { PoolFilters } from './filters';
 import { TransactionExecutor } from './transactions';
-import { createPoolKeys, logger, NETWORK, sleep } from './helpers';
+import { createPoolKeys, DEVELOPER_MODE, logger, NETWORK, sleep } from './helpers';
 import { Mutex } from 'async-mutex';
 import BN from 'bn.js';
 import { WarpTransactionExecutor } from './transactions/warp-transaction-executor';
@@ -98,9 +98,10 @@ export class Bot {
       logger.error(
         `${this.config.quoteToken.symbol} token account not found in wallet: ${this.config.wallet.publicKey.toString()}`,
       );
-      // TODO: return false;
-      // return false;
-      return true;
+      if (DEVELOPER_MODE) {
+        return true;
+      }
+      return false;
     }
 
     return true;
@@ -133,10 +134,21 @@ export class Bot {
     logger.info({ mint: poolState.baseMint.toString() }, `Buying token...`);
 
     try {
-      const [market, /*mintAta*/] = await Promise.all([
-        this.marketStorage.get(poolState.marketId.toString()),
-        // getAssociatedTokenAddress(poolState.baseMint, this.config.wallet.publicKey),
-      ]);
+      let market, mintAta;
+      
+      if (DEVELOPER_MODE) {
+        [market] = await Promise.all([
+          this.marketStorage.get(poolState.marketId.toString()),
+          // getAssociatedTokenAddress(poolState.baseMint, this.config.wallet.publicKey),
+        ]);
+      }
+      else {
+        [market, mintAta] = await Promise.all([
+          this.marketStorage.get(poolState.marketId.toString()),
+          getAssociatedTokenAddress(poolState.baseMint, this.config.wallet.publicKey),
+        ]);
+      }
+
       const poolKeys: LiquidityPoolKeysV4 = createPoolKeys(accountId, poolState, market);
 
       if (!this.config.useSnipeList) {
@@ -155,21 +167,24 @@ export class Bot {
             `Send buy transaction attempt: ${i + 1}/${this.config.maxBuyRetries}`,
           );
           const tokenOut = new Token(TOKEN_PROGRAM_ID, poolKeys.baseMint, poolKeys.baseDecimals);
-          // const result = await this.swap(
-          //   poolKeys,
-          //   this.config.quoteAta,
-          //   mintAta,
-          //   this.config.quoteToken,
-          //   tokenOut,
-          //   this.config.quoteAmount,
-          //   this.config.buySlippage,
-          //   this.config.wallet,
-          //   'buy',
-          // );
           const result = {
             confirmed: true,
             signature: 'fake-signature',
             error: null,
+          }
+          
+          if (!DEVELOPER_MODE) {
+            const result = await this.swap(
+              poolKeys,
+              this.config.quoteAta,
+              mintAta!,
+              this.config.quoteToken,
+              tokenOut,
+              this.config.quoteAmount,
+              this.config.buySlippage,
+              this.config.wallet,
+              'buy',
+            );
           }
 
           if (result.confirmed) {
@@ -246,21 +261,28 @@ export class Bot {
             `Send sell transaction attempt: ${i + 1}/${this.config.maxSellRetries}`,
           );
 
-          // const result = await this.swap(
-          //   poolKeys,
-          //   accountId,
-          //   this.config.quoteAta,
-          //   tokenIn,
-          //   this.config.quoteToken,
-          //   tokenAmountIn,
-          //   this.config.sellSlippage,
-          //   this.config.wallet,
-          //   'sell',
-          // );
-          const result = {
+          let result: {
+            confirmed: boolean;
+            signature?: string | null;
+            error?: string | null;
+          } = {
             confirmed: true,
             signature: 'fake-sign',
-            error: null,
+            error: "fake-error",
+          }
+
+          if (!DEVELOPER_MODE) {
+            result = await this.swap(
+              poolKeys,
+              accountId,
+              this.config.quoteAta,
+              tokenIn,
+              this.config.quoteToken,
+              tokenAmountIn,
+              this.config.sellSlippage,
+              this.config.wallet,
+              'sell',
+            );
           }
 
           if (result.confirmed) {

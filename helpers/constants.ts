@@ -15,6 +15,8 @@ const retrieveEnvVariable = (variableName: string, logger: Logger) => {
   return variable;
 };
 
+export const DEVELOPER_MODE: boolean = retrieveEnvVariable('DEVELOPER_MODE', logger) === 'true';
+
 // Wallet
 export const PRIVATE_KEY = retrieveEnvVariable('PRIVATE_KEY', logger);
 
