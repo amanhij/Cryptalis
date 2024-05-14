@@ -1,0 +1,843 @@
+
+> warp-solana-bot@2.0.1 start
+> ts-node index.ts
+
+[10:42:44.097] INFO: Bot is starting...
+[10:42:44.477] ERROR: SOL token account not found in wallet: DAzqF4jTJDASNB5Gu8uuxUMcLRvDidx1XbW6qCH6dVGi
+[10:42:44.497] INFO:   
+                                        ..   :-===++++-     
+                                .-==+++++++- =+++++++++-    
+            ..:::--===+=.=:     .+++++++++++:=+++++++++:    
+    .==+++++++++++++++=:+++:    .+++++++++++.=++++++++-.    
+    .-+++++++++++++++=:=++++-   .+++++++++=:.=+++++-::-.    
+     -:+++++++++++++=:+++++++-  .++++++++-:- =+++++=-:      
+      -:++++++=++++=:++++=++++= .++++++++++- =+++++:        
+       -:++++-:=++=:++++=:-+++++:+++++====--:::::::.        
+        ::=+-:::==:=+++=::-:--::::::::::---------::.        
+         ::-:  .::::::::.  --------:::..                    
+          :-    .:.-:::.                                    
+
+          WARP DRIVE ACTIVATED 🚀🐟
+          Made with ❤️ by humans.
+          Version: 2.0.1                                          
+  
+[10:42:44.497] INFO: ------- CONFIGURATION START -------
+[10:42:44.499] INFO: Wallet: DAzqF4jTJDASNB5Gu8uuxUMcLRvDidx1XbW6qCH6dVGi
+[10:42:44.499] INFO: - Bot -
+[10:42:44.499] INFO: Using default executer: true
+[10:42:44.499] INFO: Compute Unit limit: 101337
+[10:42:44.499] INFO: Compute Unit price (micro lamports): 421197
+[10:42:44.499] INFO: Single token at the time: false
+[10:42:44.499] INFO: Pre load existing markets: false
+[10:42:44.499] INFO: Cache new markets: false
+[10:42:44.499] INFO: Log level: trace
+[10:42:44.499] INFO: - Buy -
+[10:42:44.500] INFO: Buy amount: 0.001000000 Solana
+[10:42:44.500] INFO: Auto buy delay: 0 ms
+[10:42:44.500] INFO: Max buy retries: 10
+[10:42:44.500] INFO: Buy amount (SOL): 0.001000000
+[10:42:44.500] INFO: Buy slippage: 20%
+[10:42:44.500] INFO: - Sell -
+[10:42:44.500] INFO: Auto sell: true
+[10:42:44.500] INFO: Auto sell delay: 0 ms
+[10:42:44.500] INFO: Max sell retries: 10
+[10:42:44.500] INFO: Sell slippage: 20%
+[10:42:44.500] INFO: Price check interval: 2000 ms
+[10:42:44.500] INFO: Price check duration: 600000 ms
+[10:42:44.500] INFO: Take profit: 40%
+[10:42:44.500] INFO: Stop loss: 20%
+[10:42:44.500] INFO: - Snipe list -
+[10:42:44.500] INFO: Snipe list: false
+[10:42:44.500] INFO: Snipe list refresh interval: 30000 ms
+[10:42:44.500] INFO: - Filters -
+[10:42:44.500] INFO: Filter check interval: 2000 ms
+[10:42:44.500] INFO: Filter check duration: 60000 ms
+[10:42:44.500] INFO: Consecutive filter matches: 3
+[10:42:44.500] INFO: Check renounced: false
+[10:42:44.500] INFO: Check freezable: false
+[10:42:44.500] INFO: Check burned: false
+[10:42:44.501] INFO: Min pool size: 5.000000000
+[10:42:44.501] INFO: Max pool size: 50.000000000
+[10:42:44.501] INFO: ------- CONFIGURATION END -------
+[10:42:44.501] INFO: Bot is running! Press CTRL + C to stop it.
+
+> warp-solana-bot@2.0.1 start
+> ts-node index.ts
+
+[11:08:58.770] INFO: Bot is starting...
+[11:08:58.986] ERROR: SOL token account not found in wallet: DAzqF4jTJDASNB5Gu8uuxUMcLRvDidx1XbW6qCH6dVGi
+[11:08:59.017] INFO:   
+                                        ..   :-===++++-     
+                                .-==+++++++- =+++++++++-    
+            ..:::--===+=.=:     .+++++++++++:=+++++++++:    
+    .==+++++++++++++++=:+++:    .+++++++++++.=++++++++-.    
+    .-+++++++++++++++=:=++++-   .+++++++++=:.=+++++-::-.    
+     -:+++++++++++++=:+++++++-  .++++++++-:- =+++++=-:      
+      -:++++++=++++=:++++=++++= .++++++++++- =+++++:        
+       -:++++-:=++=:++++=:-+++++:+++++====--:::::::.        
+        ::=+-:::==:=+++=::-:--::::::::::---------::.        
+         ::-:  .::::::::.  --------:::..                    
+          :-    .:.-:::.                                    
+
+          WARP DRIVE ACTIVATED 🚀🐟
+          Made with ❤️ by humans.
+          Version: 2.0.1                                          
+  
+[11:08:59.017] INFO: ------- CONFIGURATION START -------
+[11:08:59.017] INFO: Wallet: DAzqF4jTJDASNB5Gu8uuxUMcLRvDidx1XbW6qCH6dVGi
+[11:08:59.017] INFO: - Bot -
+[11:08:59.017] INFO: Using default executer: true
+[11:08:59.017] INFO: Compute Unit limit: 101337
+[11:08:59.017] INFO: Compute Unit price (micro lamports): 421197
+[11:08:59.017] INFO: Single token at the time: false
+[11:08:59.017] INFO: Pre load existing markets: false
+[11:08:59.017] INFO: Cache new markets: false
+[11:08:59.017] INFO: Log level: trace
+[11:08:59.017] INFO: - Buy -
+[11:08:59.018] INFO: Buy amount: 0.001000000 Solana
+[11:08:59.018] INFO: Auto buy delay: 0 ms
+[11:08:59.018] INFO: Max buy retries: 10
+[11:08:59.018] INFO: Buy amount (SOL): 0.001000000
+[11:08:59.018] INFO: Buy slippage: 20%
+[11:08:59.018] INFO: - Sell -
+[11:08:59.018] INFO: Auto sell: true
+[11:08:59.018] INFO: Auto sell delay: 0 ms
+[11:08:59.018] INFO: Max sell retries: 10
+[11:08:59.018] INFO: Sell slippage: 20%
+[11:08:59.018] INFO: Price check interval: 2000 ms
+[11:08:59.018] INFO: Price check duration: 600000 ms
+[11:08:59.018] INFO: Take profit: 40%
+[11:08:59.018] INFO: Stop loss: 20%
+[11:08:59.018] INFO: - Snipe list -
+[11:08:59.018] INFO: Snipe list: false
+[11:08:59.018] INFO: Snipe list refresh interval: 30000 ms
+[11:08:59.018] INFO: - Filters -
+[11:08:59.018] INFO: Filter check interval: 2000 ms
+[11:08:59.018] INFO: Filter check duration: 60000 ms
+[11:08:59.018] INFO: Consecutive filter matches: 3
+[11:08:59.018] INFO: Check renounced: false
+[11:08:59.018] INFO: Check freezable: false
+[11:08:59.018] INFO: Check burned: false
+[11:08:59.019] INFO: Min pool size: 5.000000000
+[11:08:59.019] INFO: Max pool size: 50.000000000
+[11:08:59.019] INFO: High ownership threshold percentage: 50
+[11:08:59.019] INFO: ------- CONFIGURATION END -------
+[11:08:59.019] INFO: Bot is running! Press CTRL + C to stop it.
+[11:10:51.576] TRACE: Caching new pool for mint: ZQdxbFjXB5hqPfjtQoiAaQ9icQypCWyncW4xDEJCrbN
+[11:10:51.579] TRACE: Processing new pool...
+    mint: "ZQdxbFjXB5hqPfjtQoiAaQ9icQypCWyncW4xDEJCrbN"
+[11:10:51.579] INFO: Buying token...
+    mint: "ZQdxbFjXB5hqPfjtQoiAaQ9icQypCWyncW4xDEJCrbN"
+[11:10:51.580] TRACE: Fetching new market keys for 6hew2k1gsWwDp5dHeLSU4m5TL7xk6Rr7dgjCq9g6mkLQ
+[11:10:51.835] ERROR: Failed to buy token
+    mint: "ZQdxbFjXB5hqPfjtQoiAaQ9icQypCWyncW4xDEJCrbN"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account 6hew2k1gsWwDp5dHeLSU4m5TL7xk6Rr7dgjCq9g6mkLQ: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account 6hew2k1gsWwDp5dHeLSU4m5TL7xk6Rr7dgjCq9g6mkLQ: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:15:12.844] TRACE: Caching new pool for mint: 4t91ikHfkm97C66gU1wdztQJ2L7c5zFeAALmDsXJMvzm
+[11:15:12.847] TRACE: Processing new pool...
+    mint: "4t91ikHfkm97C66gU1wdztQJ2L7c5zFeAALmDsXJMvzm"
+[11:15:12.847] INFO: Buying token...
+    mint: "4t91ikHfkm97C66gU1wdztQJ2L7c5zFeAALmDsXJMvzm"
+[11:15:12.847] TRACE: Fetching new market keys for 3Ceb9P4QUgjuXUqPdNaLqPauDoJ4z7HYiQMwpEJGYCKF
+[11:15:13.063] ERROR: Failed to buy token
+    mint: "4t91ikHfkm97C66gU1wdztQJ2L7c5zFeAALmDsXJMvzm"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account 3Ceb9P4QUgjuXUqPdNaLqPauDoJ4z7HYiQMwpEJGYCKF: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account 3Ceb9P4QUgjuXUqPdNaLqPauDoJ4z7HYiQMwpEJGYCKF: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:17:50.740] TRACE: Caching new pool for mint: CBFv1RV2G7E8jNxnQNUzTTVoAFG5cygZdKVuvPrU15QD
+[11:17:50.745] TRACE: Processing new pool...
+    mint: "CBFv1RV2G7E8jNxnQNUzTTVoAFG5cygZdKVuvPrU15QD"
+[11:17:50.745] INFO: Buying token...
+    mint: "CBFv1RV2G7E8jNxnQNUzTTVoAFG5cygZdKVuvPrU15QD"
+[11:17:50.745] TRACE: Fetching new market keys for 526VroeNYyqegW5ci4zfPtVGq7nHFZ4LrJd7J9kG5KPW
+[11:17:50.979] ERROR: Failed to buy token
+    mint: "CBFv1RV2G7E8jNxnQNUzTTVoAFG5cygZdKVuvPrU15QD"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account 526VroeNYyqegW5ci4zfPtVGq7nHFZ4LrJd7J9kG5KPW: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account 526VroeNYyqegW5ci4zfPtVGq7nHFZ4LrJd7J9kG5KPW: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:18:24.718] TRACE: Caching new pool for mint: E3prLTRDLp64Dz39CMKieCjYr2Dk6LWo8GdJyVyfDoQ
+[11:18:24.720] TRACE: Processing new pool...
+    mint: "E3prLTRDLp64Dz39CMKieCjYr2Dk6LWo8GdJyVyfDoQ"
+[11:18:24.720] INFO: Buying token...
+    mint: "E3prLTRDLp64Dz39CMKieCjYr2Dk6LWo8GdJyVyfDoQ"
+[11:18:24.720] TRACE: Fetching new market keys for HAViH8bwyV1V2UiNcsdYqRcdNXNhxzRoe1t9CMUAt2Wh
+[11:18:24.844] ERROR: Failed to buy token
+    mint: "E3prLTRDLp64Dz39CMKieCjYr2Dk6LWo8GdJyVyfDoQ"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account HAViH8bwyV1V2UiNcsdYqRcdNXNhxzRoe1t9CMUAt2Wh: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account HAViH8bwyV1V2UiNcsdYqRcdNXNhxzRoe1t9CMUAt2Wh: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:19:18.855] TRACE: Caching new pool for mint: 6SzM4Sr2ytTTFRxeVzHHurrJAsChB1Sr7G99o2ZDqJVa
+[11:19:18.857] TRACE: Processing new pool...
+    mint: "6SzM4Sr2ytTTFRxeVzHHurrJAsChB1Sr7G99o2ZDqJVa"
+[11:19:18.857] INFO: Buying token...
+    mint: "6SzM4Sr2ytTTFRxeVzHHurrJAsChB1Sr7G99o2ZDqJVa"
+[11:19:18.857] TRACE: Fetching new market keys for 5c7bS8gcSQagkT2LK2Hn5eVCVz8gtZDwvWu97rDRwiji
+[11:19:19.063] ERROR: Failed to buy token
+    mint: "6SzM4Sr2ytTTFRxeVzHHurrJAsChB1Sr7G99o2ZDqJVa"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account 5c7bS8gcSQagkT2LK2Hn5eVCVz8gtZDwvWu97rDRwiji: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account 5c7bS8gcSQagkT2LK2Hn5eVCVz8gtZDwvWu97rDRwiji: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+
+> warp-solana-bot@2.0.1 start
+> ts-node index.ts
+
+[11:19:24.364] INFO: Bot is starting...
+[11:19:24.578] ERROR: SOL token account not found in wallet: DAzqF4jTJDASNB5Gu8uuxUMcLRvDidx1XbW6qCH6dVGi
+[11:19:24.610] INFO:   
+                                        ..   :-===++++-     
+                                .-==+++++++- =+++++++++-    
+            ..:::--===+=.=:     .+++++++++++:=+++++++++:    
+    .==+++++++++++++++=:+++:    .+++++++++++.=++++++++-.    
+    .-+++++++++++++++=:=++++-   .+++++++++=:.=+++++-::-.    
+     -:+++++++++++++=:+++++++-  .++++++++-:- =+++++=-:      
+      -:++++++=++++=:++++=++++= .++++++++++- =+++++:        
+       -:++++-:=++=:++++=:-+++++:+++++====--:::::::.        
+        ::=+-:::==:=+++=::-:--::::::::::---------::.        
+         ::-:  .::::::::.  --------:::..                    
+          :-    .:.-:::.                                    
+
+          WARP DRIVE ACTIVATED 🚀🐟
+          Made with ❤️ by humans.
+          Version: 2.0.1                                          
+  
+[11:19:24.610] INFO: ------- CONFIGURATION START -------
+[11:19:24.610] INFO: Wallet: DAzqF4jTJDASNB5Gu8uuxUMcLRvDidx1XbW6qCH6dVGi
+[11:19:24.610] INFO: - Bot -
+[11:19:24.610] INFO: Using default executer: true
+[11:19:24.610] INFO: Compute Unit limit: 101337
+[11:19:24.610] INFO: Compute Unit price (micro lamports): 421197
+[11:19:24.610] INFO: Single token at the time: false
+[11:19:24.610] INFO: Pre load existing markets: false
+[11:19:24.610] INFO: Cache new markets: false
+[11:19:24.610] INFO: Log level: trace
+[11:19:24.610] INFO: - Buy -
+[11:19:24.611] INFO: Buy amount: 0.001000000 Solana
+[11:19:24.611] INFO: Auto buy delay: 2000 ms
+[11:19:24.611] INFO: Max buy retries: 10
+[11:19:24.612] INFO: Buy amount (SOL): 0.001000000
+[11:19:24.612] INFO: Buy slippage: 20%
+[11:19:24.612] INFO: - Sell -
+[11:19:24.612] INFO: Auto sell: true
+[11:19:24.612] INFO: Auto sell delay: 0 ms
+[11:19:24.612] INFO: Max sell retries: 10
+[11:19:24.612] INFO: Sell slippage: 20%
+[11:19:24.612] INFO: Price check interval: 2000 ms
+[11:19:24.612] INFO: Price check duration: 600000 ms
+[11:19:24.612] INFO: Take profit: 40%
+[11:19:24.612] INFO: Stop loss: 20%
+[11:19:24.612] INFO: - Snipe list -
+[11:19:24.612] INFO: Snipe list: false
+[11:19:24.612] INFO: Snipe list refresh interval: 30000 ms
+[11:19:24.612] INFO: - Filters -
+[11:19:24.612] INFO: Filter check interval: 2000 ms
+[11:19:24.612] INFO: Filter check duration: 60000 ms
+[11:19:24.612] INFO: Consecutive filter matches: 3
+[11:19:24.612] INFO: Check renounced: false
+[11:19:24.612] INFO: Check freezable: false
+[11:19:24.612] INFO: Check burned: false
+[11:19:24.612] INFO: Min pool size: 5.000000000
+[11:19:24.612] INFO: Max pool size: 50.000000000
+[11:19:24.612] INFO: High ownership threshold percentage: 50
+[11:19:24.612] INFO: ------- CONFIGURATION END -------
+[11:19:24.612] INFO: Bot is running! Press CTRL + C to stop it.
+[11:19:45.953] TRACE: Caching new pool for mint: NduiYmdFr3V3MwztHCRJY9hZE7i7FADMTB1fSa5vYLh
+[11:19:45.956] TRACE: Processing new pool...
+    mint: "NduiYmdFr3V3MwztHCRJY9hZE7i7FADMTB1fSa5vYLh"
+[11:19:45.956] DEBUG: Waiting for 2000 ms before buy
+    mint: "NduiYmdFr3V3MwztHCRJY9hZE7i7FADMTB1fSa5vYLh"
+[11:19:47.957] INFO: Buying token...
+    mint: "NduiYmdFr3V3MwztHCRJY9hZE7i7FADMTB1fSa5vYLh"
+[11:19:47.958] TRACE: Fetching new market keys for 96tK4cp5iAoMeCvWkdfTgZmGjiEKniKhdhi2ptzUDux
+[11:19:48.078] ERROR: Failed to buy token
+    mint: "NduiYmdFr3V3MwztHCRJY9hZE7i7FADMTB1fSa5vYLh"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account 96tK4cp5iAoMeCvWkdfTgZmGjiEKniKhdhi2ptzUDux: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account 96tK4cp5iAoMeCvWkdfTgZmGjiEKniKhdhi2ptzUDux: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:20:21.278] TRACE: Caching new pool for mint: FpbCKyxWSsoio6kBaqDNtBz1ckJY8FSfWexCptzemW5K
+[11:20:21.280] TRACE: Processing new pool...
+    mint: "FpbCKyxWSsoio6kBaqDNtBz1ckJY8FSfWexCptzemW5K"
+[11:20:21.280] DEBUG: Waiting for 2000 ms before buy
+    mint: "FpbCKyxWSsoio6kBaqDNtBz1ckJY8FSfWexCptzemW5K"
+[11:20:23.281] INFO: Buying token...
+    mint: "FpbCKyxWSsoio6kBaqDNtBz1ckJY8FSfWexCptzemW5K"
+[11:20:23.282] TRACE: Fetching new market keys for 46CdUJtWZcBqGaEbgQcachRcBUk3gSF33q1MaeBbuAqp
+[11:20:23.392] ERROR: Failed to buy token
+    mint: "FpbCKyxWSsoio6kBaqDNtBz1ckJY8FSfWexCptzemW5K"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account 46CdUJtWZcBqGaEbgQcachRcBUk3gSF33q1MaeBbuAqp: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account 46CdUJtWZcBqGaEbgQcachRcBUk3gSF33q1MaeBbuAqp: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:21:01.121] TRACE: Caching new pool for mint: C7cUkm92LBRwk8UBskN4RfgSeZ1Bw9WrhnCsFBMPfd8
+[11:21:01.126] TRACE: Processing new pool...
+    mint: "C7cUkm92LBRwk8UBskN4RfgSeZ1Bw9WrhnCsFBMPfd8"
+[11:21:01.126] DEBUG: Waiting for 2000 ms before buy
+    mint: "C7cUkm92LBRwk8UBskN4RfgSeZ1Bw9WrhnCsFBMPfd8"
+[11:21:03.127] INFO: Buying token...
+    mint: "C7cUkm92LBRwk8UBskN4RfgSeZ1Bw9WrhnCsFBMPfd8"
+[11:21:03.127] TRACE: Fetching new market keys for HPRtRQCuAp15zvkUe3Z5k7JQJs2dLGwRWqJzX6iLvUGU
+[11:21:03.351] ERROR: Failed to buy token
+    mint: "C7cUkm92LBRwk8UBskN4RfgSeZ1Bw9WrhnCsFBMPfd8"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account HPRtRQCuAp15zvkUe3Z5k7JQJs2dLGwRWqJzX6iLvUGU: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account HPRtRQCuAp15zvkUe3Z5k7JQJs2dLGwRWqJzX6iLvUGU: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:23:17.412] TRACE: Caching new pool for mint: 3NapsyTVDUCawkYjD3oR6r5pTKjbHqhafZThpNSubFy1
+[11:23:17.414] TRACE: Processing new pool...
+    mint: "3NapsyTVDUCawkYjD3oR6r5pTKjbHqhafZThpNSubFy1"
+[11:23:17.414] DEBUG: Waiting for 2000 ms before buy
+    mint: "3NapsyTVDUCawkYjD3oR6r5pTKjbHqhafZThpNSubFy1"
+[11:23:19.415] INFO: Buying token...
+    mint: "3NapsyTVDUCawkYjD3oR6r5pTKjbHqhafZThpNSubFy1"
+[11:23:19.415] TRACE: Fetching new market keys for 68Gi725YoVEML4aUBCt9JQbtdxpZ4WnoZR46gTKv9MNw
+[11:23:19.632] ERROR: Failed to buy token
+    mint: "3NapsyTVDUCawkYjD3oR6r5pTKjbHqhafZThpNSubFy1"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account 68Gi725YoVEML4aUBCt9JQbtdxpZ4WnoZR46gTKv9MNw: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account 68Gi725YoVEML4aUBCt9JQbtdxpZ4WnoZR46gTKv9MNw: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:23:22.736] TRACE: Caching new pool for mint: Hz81ptXVkuMNRV4EfnH2s9arZsnqgSuxT3m1xj15KJ78
+[11:23:22.737] TRACE: Processing new pool...
+    mint: "Hz81ptXVkuMNRV4EfnH2s9arZsnqgSuxT3m1xj15KJ78"
+[11:23:22.737] DEBUG: Waiting for 2000 ms before buy
+    mint: "Hz81ptXVkuMNRV4EfnH2s9arZsnqgSuxT3m1xj15KJ78"
+[11:23:24.739] INFO: Buying token...
+    mint: "Hz81ptXVkuMNRV4EfnH2s9arZsnqgSuxT3m1xj15KJ78"
+[11:23:24.740] TRACE: Fetching new market keys for FiZQEqsdCrJS5hPrVx5j4VL6j12cPYaLXcQU5TrVyZvp
+[11:23:24.866] ERROR: Failed to buy token
+    mint: "Hz81ptXVkuMNRV4EfnH2s9arZsnqgSuxT3m1xj15KJ78"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account FiZQEqsdCrJS5hPrVx5j4VL6j12cPYaLXcQU5TrVyZvp: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account FiZQEqsdCrJS5hPrVx5j4VL6j12cPYaLXcQU5TrVyZvp: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:24:16.275] TRACE: Caching new pool for mint: EPvUXaKQ4tvUCGYNfLCqDa1Gm6wVRQfikgJW1KNqXBkN
+[11:24:16.278] TRACE: Processing new pool...
+    mint: "EPvUXaKQ4tvUCGYNfLCqDa1Gm6wVRQfikgJW1KNqXBkN"
+[11:24:16.279] DEBUG: Waiting for 2000 ms before buy
+    mint: "EPvUXaKQ4tvUCGYNfLCqDa1Gm6wVRQfikgJW1KNqXBkN"
+[11:24:18.280] INFO: Buying token...
+    mint: "EPvUXaKQ4tvUCGYNfLCqDa1Gm6wVRQfikgJW1KNqXBkN"
+[11:24:18.280] TRACE: Fetching new market keys for GH1AB7UPf9cvkPLWKKEmmnWbRjr4BNsUyfuSbsr9oQ3i
+[11:24:18.389] ERROR: Failed to buy token
+    mint: "EPvUXaKQ4tvUCGYNfLCqDa1Gm6wVRQfikgJW1KNqXBkN"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account GH1AB7UPf9cvkPLWKKEmmnWbRjr4BNsUyfuSbsr9oQ3i: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account GH1AB7UPf9cvkPLWKKEmmnWbRjr4BNsUyfuSbsr9oQ3i: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+[11:25:01.394] TRACE: Caching new pool for mint: 58VefafPcTWSq4sVfJA52KrVbXHqqEQvbNSqB4JTcBW
+[11:25:01.400] TRACE: Processing new pool...
+    mint: "58VefafPcTWSq4sVfJA52KrVbXHqqEQvbNSqB4JTcBW"
+[11:25:01.401] DEBUG: Waiting for 2000 ms before buy
+    mint: "58VefafPcTWSq4sVfJA52KrVbXHqqEQvbNSqB4JTcBW"
+[11:25:03.402] INFO: Buying token...
+    mint: "58VefafPcTWSq4sVfJA52KrVbXHqqEQvbNSqB4JTcBW"
+[11:25:03.403] TRACE: Fetching new market keys for 2V3XQtamZjZRcn8zm1jTC6c75KnNPcgF8gdeqCx8yMmP
+[11:25:03.605] ERROR: Failed to buy token
+    mint: "58VefafPcTWSq4sVfJA52KrVbXHqqEQvbNSqB4JTcBW"
+    error: {
+      "type": "Error",
+      "message": "Failed to fetch minimal market: Error: failed to get info about account 2V3XQtamZjZRcn8zm1jTC6c75KnNPcgF8gdeqCx8yMmP: Error: 404 Not Found: Not Found\n",
+      "stack":
+          Error: Failed to fetch minimal market: Error: failed to get info about account 2V3XQtamZjZRcn8zm1jTC6c75KnNPcgF8gdeqCx8yMmP: Error: 404 Not Found: Not Found
+          
+              at /Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:24:11
+              at Generator.throw (<anonymous>)
+              at rejected (/Users/tuncatunc/git/solana-trading-bot/helpers/market.ts:6:65)
+              at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    }
+
+> warp-solana-bot@2.0.1 start
+> ts-node index.ts
+
+[11:26:21.637] INFO: Bot is starting...
+[11:26:22.699] ERROR: SOL token account not found in wallet: DAzqF4jTJDASNB5Gu8uuxUMcLRvDidx1XbW6qCH6dVGi
+[11:26:22.706] INFO:   
+                                        ..   :-===++++-     
+                                .-==+++++++- =+++++++++-    
+            ..:::--===+=.=:     .+++++++++++:=+++++++++:    
+    .==+++++++++++++++=:+++:    .+++++++++++.=++++++++-.    
+    .-+++++++++++++++=:=++++-   .+++++++++=:.=+++++-::-.    
+     -:+++++++++++++=:+++++++-  .++++++++-:- =+++++=-:      
+      -:++++++=++++=:++++=++++= .++++++++++- =+++++:        
+       -:++++-:=++=:++++=:-+++++:+++++====--:::::::.        
+        ::=+-:::==:=+++=::-:--::::::::::---------::.        
+         ::-:  .::::::::.  --------:::..                    
+          :-    .:.-:::.                                    
+
+          WARP DRIVE ACTIVATED 🚀🐟
+          Made with ❤️ by humans.
+          Version: 2.0.1                                          
+  
+[11:26:22.706] INFO: ------- CONFIGURATION START -------
+[11:26:22.706] INFO: Wallet: DAzqF4jTJDASNB5Gu8uuxUMcLRvDidx1XbW6qCH6dVGi
+[11:26:22.706] INFO: - Bot -
+[11:26:22.706] INFO: Using default executer: true
+[11:26:22.706] INFO: Compute Unit limit: 101337
+[11:26:22.706] INFO: Compute Unit price (micro lamports): 421197
+[11:26:22.706] INFO: Single token at the time: false
+[11:26:22.706] INFO: Pre load existing markets: false
+[11:26:22.706] INFO: Cache new markets: false
+[11:26:22.706] INFO: Log level: trace
+[11:26:22.706] INFO: - Buy -
+[11:26:22.708] INFO: Buy amount: 0.001000000 Solana
+[11:26:22.708] INFO: Auto buy delay: 2000 ms
+[11:26:22.708] INFO: Max buy retries: 10
+[11:26:22.708] INFO: Buy amount (SOL): 0.001000000
+[11:26:22.708] INFO: Buy slippage: 20%
+[11:26:22.708] INFO: - Sell -
+[11:26:22.708] INFO: Auto sell: true
+[11:26:22.708] INFO: Auto sell delay: 0 ms
+[11:26:22.708] INFO: Max sell retries: 10
+[11:26:22.708] INFO: Sell slippage: 20%
+[11:26:22.708] INFO: Price check interval: 2000 ms
+[11:26:22.708] INFO: Price check duration: 600000 ms
+[11:26:22.708] INFO: Take profit: 40%
+[11:26:22.708] INFO: Stop loss: 20%
+[11:26:22.708] INFO: - Snipe list -
+[11:26:22.708] INFO: Snipe list: false
+[11:26:22.708] INFO: Snipe list refresh interval: 30000 ms
+[11:26:22.708] INFO: - Filters -
+[11:26:22.708] INFO: Filter check interval: 2000 ms
+[11:26:22.708] INFO: Filter check duration: 60000 ms
+[11:26:22.708] INFO: Consecutive filter matches: 3
+[11:26:22.708] INFO: Check renounced: false
+[11:26:22.708] INFO: Check freezable: false
+[11:26:22.708] INFO: Check burned: false
+[11:26:22.708] INFO: Min pool size: 5.000000000
+[11:26:22.708] INFO: Max pool size: 50.000000000
+[11:26:22.708] INFO: High ownership threshold percentage: 50
+[11:26:22.708] INFO: ------- CONFIGURATION END -------
+[11:26:22.708] INFO: Bot is running! Press CTRL + C to stop it.
+[11:28:58.320] TRACE: Caching new pool for mint: 5498inusm5zBFxMWEdsKPfmuwwDfiUJ1LsJcBxXP8sNK
+[11:28:58.328] TRACE: Processing new pool...
+    mint: "5498inusm5zBFxMWEdsKPfmuwwDfiUJ1LsJcBxXP8sNK"
+[11:28:58.328] DEBUG: Waiting for 2000 ms before buy
+    mint: "5498inusm5zBFxMWEdsKPfmuwwDfiUJ1LsJcBxXP8sNK"
+[11:29:00.330] INFO: Buying token...
+    mint: "5498inusm5zBFxMWEdsKPfmuwwDfiUJ1LsJcBxXP8sNK"
+[11:29:00.331] TRACE: Fetching new market keys for Egpo23TcskKTHLgwiX8nRx9uiagoF4V8yqAsV5QpDVem
+[11:29:06.418] DEBUG: Filter match 3/3
+    mint: "5498inusm5zBFxMWEdsKPfmuwwDfiUJ1LsJcBxXP8sNK"
+[11:29:06.418] INFO: Send buy transaction attempt: 1/10
+    mint: "5498inusm5zBFxMWEdsKPfmuwwDfiUJ1LsJcBxXP8sNK"
+[11:29:06.419] INFO: Confirmed buy tx
+    mint: "5498inusm5zBFxMWEdsKPfmuwwDfiUJ1LsJcBxXP8sNK"
+    signature: "fake-sign"
+    url: "https://solscan.io/tx/fake-sign?cluster=mainnet-beta"
+[11:30:01.842] TRACE: Caching new pool for mint: 8cgY464bomCvyNttu9cceNFEj6LJks4ZnKsrt8R4mMgt
+[11:30:01.844] TRACE: Processing new pool...
+    mint: "8cgY464bomCvyNttu9cceNFEj6LJks4ZnKsrt8R4mMgt"
+[11:30:01.844] DEBUG: Waiting for 2000 ms before buy
+    mint: "8cgY464bomCvyNttu9cceNFEj6LJks4ZnKsrt8R4mMgt"
+[11:30:03.845] INFO: Buying token...
+    mint: "8cgY464bomCvyNttu9cceNFEj6LJks4ZnKsrt8R4mMgt"
+[11:30:03.845] TRACE: Fetching new market keys for AyQnUkukpfAL4A2twxB6sK5jmBwcxEHw7K7Xp5LiMRu8
+[11:30:09.980] DEBUG: Filter match 3/3
+    mint: "8cgY464bomCvyNttu9cceNFEj6LJks4ZnKsrt8R4mMgt"
+[11:30:09.980] INFO: Send buy transaction attempt: 1/10
+    mint: "8cgY464bomCvyNttu9cceNFEj6LJks4ZnKsrt8R4mMgt"
+[11:30:09.980] INFO: Confirmed buy tx
+    mint: "8cgY464bomCvyNttu9cceNFEj6LJks4ZnKsrt8R4mMgt"
+    signature: "fake-sign"
+    url: "https://solscan.io/tx/fake-sign?cluster=mainnet-beta"
+[11:32:19.080] TRACE: Caching new pool for mint: FtG4DgaiTiSJfepVB2Rxr9i3nk3FaHVFgJL5hKzURc19
+[11:32:19.084] TRACE: Processing new pool...
+    mint: "FtG4DgaiTiSJfepVB2Rxr9i3nk3FaHVFgJL5hKzURc19"
+[11:32:19.084] DEBUG: Waiting for 2000 ms before buy
+    mint: "FtG4DgaiTiSJfepVB2Rxr9i3nk3FaHVFgJL5hKzURc19"
+[11:32:21.086] INFO: Buying token...
+    mint: "FtG4DgaiTiSJfepVB2Rxr9i3nk3FaHVFgJL5hKzURc19"
+[11:32:21.086] TRACE: Fetching new market keys for 4LjTfq7RidtpzckspppfWjByFAjXc7f7pXFrbERpF8po
+[11:32:22.588] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:23.393] TRACE: Caching new pool for mint: CLdXBGM3ac8aJpDjtCvfiwur5iKRZmDBrCUH65ugXidc
+[11:32:23.397] TRACE: Processing new pool...
+    mint: "CLdXBGM3ac8aJpDjtCvfiwur5iKRZmDBrCUH65ugXidc"
+[11:32:23.397] DEBUG: Waiting for 2000 ms before buy
+    mint: "CLdXBGM3ac8aJpDjtCvfiwur5iKRZmDBrCUH65ugXidc"
+[11:32:25.184] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:25.398] INFO: Buying token...
+    mint: "CLdXBGM3ac8aJpDjtCvfiwur5iKRZmDBrCUH65ugXidc"
+[11:32:25.398] TRACE: Fetching new market keys for BxBWjV8p2cXjf74hRqGj8K1erAjxQbw7BTjr7WTp4wnD
+[11:32:25.904] TRACE: PoolSize -> Pool size 370.002110000 > 50.000000000
+[11:32:25.904] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:27.550] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:28.244] TRACE: PoolSize -> Pool size 370.024310000 > 50.000000000
+[11:32:28.244] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:29.929] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:30.567] TRACE: PoolSize -> Pool size 370.024610000 > 50.000000000
+[11:32:30.567] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:32.298] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:33.029] TRACE: PoolSize -> Pool size 370.064710000 > 50.000000000
+[11:32:33.029] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:34.684] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:35.386] TRACE: PoolSize -> Pool size 370.064910000 > 50.000000000
+[11:32:35.386] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:37.053] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:37.825] TRACE: PoolSize -> Pool size 370.064910000 > 50.000000000
+[11:32:37.825] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:39.391] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:40.290] TRACE: PoolSize -> Pool size 370.065010000 > 50.000000000
+[11:32:40.290] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:41.724] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:42.787] TRACE: PoolSize -> Pool size 370.065010000 > 50.000000000
+[11:32:42.787] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:44.065] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:45.126] TRACE: PoolSize -> Pool size 370.065110000 > 50.000000000
+[11:32:45.126] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:46.551] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:47.451] TRACE: PoolSize -> Pool size 370.065110000 > 50.000000000
+[11:32:47.451] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:48.883] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:49.994] TRACE: PoolSize -> Pool size 370.065110000 > 50.000000000
+[11:32:49.994] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:51.367] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:52.480] TRACE: PoolSize -> Pool size 370.065110000 > 50.000000000
+[11:32:52.480] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:53.810] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:54.902] TRACE: PoolSize -> Pool size 370.865410000 > 50.000000000
+[11:32:54.902] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:56.241] TRACE: PoolSize -> Pool size 54.354563821 > 50.000000000
+[11:32:56.241] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:57.219] TRACE: PoolSize -> Pool size 370.845319374 > 50.000000000
+[11:32:57.219] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:58.583] TRACE: PoolSize -> Pool size 54.354563821 > 50.000000000
+[11:32:58.583] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:32:59.582] TRACE: PoolSize -> Pool size 370.845119480 > 50.000000000
+[11:32:59.582] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:00.934] TRACE: PoolSize -> Pool size 64.394933287 > 50.000000000
+[11:33:00.934] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:01.935] TRACE: PoolSize -> Pool size 370.845019527 > 50.000000000
+[11:33:01.935] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:03.291] TRACE: PoolSize -> Pool size 64.394933287 > 50.000000000
+[11:33:03.291] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:04.350] TRACE: PoolSize -> Pool size 371.945019527 > 50.000000000
+[11:33:04.350] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:05.635] TRACE: PoolSize -> Pool size 78.207199131 > 50.000000000
+[11:33:05.635] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:06.689] TRACE: PoolSize -> Pool size 371.945219527 > 50.000000000
+[11:33:06.689] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:07.962] TRACE: PoolSize -> Pool size 78.207399131 > 50.000000000
+[11:33:07.962] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:09.057] TRACE: PoolSize -> Pool size 371.945219527 > 50.000000000
+[11:33:09.057] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:10.296] TRACE: PoolSize -> Pool size 78.207499131 > 50.000000000
+[11:33:10.296] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:11.426] TRACE: PoolSize -> Pool size 371.945219527 > 50.000000000
+[11:33:11.426] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:12.637] TRACE: PoolSize -> Pool size 93.604507410 > 50.000000000
+[11:33:12.637] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:13.891] TRACE: PoolSize -> Pool size 371.905014274 > 50.000000000
+[11:33:13.891] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:14.981] TRACE: PoolSize -> Pool size 93.604507410 > 50.000000000
+[11:33:14.981] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:16.217] TRACE: PoolSize -> Pool size 371.905014274 > 50.000000000
+[11:33:16.217] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:17.305] TRACE: PoolSize -> Pool size 94.868643695 > 50.000000000
+[11:33:17.305] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:18.687] TRACE: PoolSize -> Pool size 371.905014274 > 50.000000000
+[11:33:18.687] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:19.646] TRACE: PoolSize -> Pool size 94.868643695 > 50.000000000
+[11:33:19.646] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:21.146] TRACE: PoolSize -> Pool size 371.905014274 > 50.000000000
+[11:33:21.146] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:21.964] TRACE: PoolSize -> Pool size 92.579806301 > 50.000000000
+[11:33:21.964] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:23.710] TRACE: PoolSize -> Pool size 371.905014274 > 50.000000000
+[11:33:23.710] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:24.406] TRACE: PoolSize -> Pool size 95.266531293 > 50.000000000
+[11:33:24.406] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:26.160] TRACE: PoolSize -> Pool size 372.905014274 > 50.000000000
+[11:33:26.160] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:26.355] TRACE: Caching new pool for mint: 6JJKMw2Wfxv955a4PEv6U6LDJ9qgTHoLqdqbPpH7GGzC
+[11:33:26.357] TRACE: Processing new pool...
+    mint: "6JJKMw2Wfxv955a4PEv6U6LDJ9qgTHoLqdqbPpH7GGzC"
+[11:33:26.357] DEBUG: Waiting for 2000 ms before buy
+    mint: "6JJKMw2Wfxv955a4PEv6U6LDJ9qgTHoLqdqbPpH7GGzC"
+[11:33:26.828] TRACE: PoolSize -> Pool size 98.665575663 > 50.000000000
+[11:33:26.828] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:28.358] INFO: Buying token...
+    mint: "6JJKMw2Wfxv955a4PEv6U6LDJ9qgTHoLqdqbPpH7GGzC"
+[11:33:28.358] TRACE: Fetching new market keys for 7YYmKKhNzqS4XGY5oTDKaYBBK5bBER8NERypfmFkxa6f
+[11:33:28.501] TRACE: PoolSize -> Pool size 372.905014274 > 50.000000000
+[11:33:28.501] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:29.153] TRACE: PoolSize -> Pool size 105.863638369 > 50.000000000
+[11:33:29.153] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:29.184] TRACE: PoolSize -> Pool size 0.682000000 < 5.000000000
+[11:33:29.184] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:30.998] TRACE: PoolSize -> Pool size 372.905014274 > 50.000000000
+[11:33:30.998] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:31.514] TRACE: PoolSize -> Pool size 105.863638369 > 50.000000000
+[11:33:31.515] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:31.877] TRACE: PoolSize -> Pool size 0.682710000 < 5.000000000
+[11:33:31.877] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:33.330] TRACE: PoolSize -> Pool size 372.905014274 > 50.000000000
+[11:33:33.330] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:33.515] TRACE: Skipping buy because pool doesn't match filters
+    mint: "FtG4DgaiTiSJfepVB2Rxr9i3nk3FaHVFgJL5hKzURc19"
+[11:33:34.185] TRACE: PoolSize -> Pool size 0.703710000 < 5.000000000
+[11:33:34.185] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:35.790] TRACE: PoolSize -> Pool size 374.205014274 > 50.000000000
+[11:33:35.790] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:36.531] TRACE: PoolSize -> Pool size 0.704910000 < 5.000000000
+[11:33:36.531] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:37.790] TRACE: Skipping buy because pool doesn't match filters
+    mint: "CLdXBGM3ac8aJpDjtCvfiwur5iKRZmDBrCUH65ugXidc"
+[11:33:39.033] TRACE: PoolSize -> Pool size 0.704910000 < 5.000000000
+[11:33:39.033] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:41.483] TRACE: PoolSize -> Pool size 0.705210000 < 5.000000000
+[11:33:41.483] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:43.958] TRACE: PoolSize -> Pool size 0.705410000 < 5.000000000
+[11:33:43.958] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:46.425] TRACE: PoolSize -> Pool size 0.705110981 < 5.000000000
+[11:33:46.425] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:46.847] TRACE: Caching new pool for mint: 4CjYtAabbor8fFm6TjqtjbVhfSfzH4WEDchseHFoy2Rw
+[11:33:46.848] TRACE: Processing new pool...
+    mint: "4CjYtAabbor8fFm6TjqtjbVhfSfzH4WEDchseHFoy2Rw"
+[11:33:46.848] DEBUG: Waiting for 2000 ms before buy
+    mint: "4CjYtAabbor8fFm6TjqtjbVhfSfzH4WEDchseHFoy2Rw"
+[11:33:48.735] TRACE: PoolSize -> Pool size 0.705110981 < 5.000000000
+[11:33:48.735] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:48.850] INFO: Buying token...
+    mint: "4CjYtAabbor8fFm6TjqtjbVhfSfzH4WEDchseHFoy2Rw"
+[11:33:48.850] TRACE: Fetching new market keys for 54uPTSBCi9ZEtCPKP6aXvLVZ3MiV2k4pK6EqXBroGVjU
+[11:33:49.315] TRACE: PoolSize -> Pool size 540.001700000 > 50.000000000
+[11:33:49.316] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:51.076] TRACE: PoolSize -> Pool size 0.705110981 < 5.000000000
+[11:33:51.076] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:51.657] TRACE: PoolSize -> Pool size 540.012810000 > 50.000000000
+[11:33:51.657] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:53.512] TRACE: PoolSize -> Pool size 0.705110981 < 5.000000000
+[11:33:53.512] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:54.107] TRACE: PoolSize -> Pool size 540.013410000 > 50.000000000
+[11:33:54.108] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:55.980] TRACE: PoolSize -> Pool size 0.704911754 < 5.000000000
+[11:33:55.980] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:56.447] TRACE: PoolSize -> Pool size 540.074010000 > 50.000000000
+[11:33:56.447] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:58.327] TRACE: PoolSize -> Pool size 0.704905249 < 5.000000000
+[11:33:58.328] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:33:58.762] TRACE: PoolSize -> Pool size 540.074010000 > 50.000000000
+[11:33:58.762] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:00.764] TRACE: PoolSize -> Pool size 0.704805156 < 5.000000000
+[11:34:00.764] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:01.105] TRACE: PoolSize -> Pool size 540.173010000 > 50.000000000
+[11:34:01.105] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:03.227] TRACE: PoolSize -> Pool size 0.704805156 < 5.000000000
+[11:34:03.227] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:03.694] TRACE: PoolSize -> Pool size 540.173010000 > 50.000000000
+[11:34:03.694] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:05.583] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:05.583] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:06.057] TRACE: PoolSize -> Pool size 540.173110000 > 50.000000000
+[11:34:06.057] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:07.926] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:07.926] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:08.488] TRACE: PoolSize -> Pool size 540.173410000 > 50.000000000
+[11:34:08.488] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:10.279] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:10.279] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:10.929] TRACE: PoolSize -> Pool size 541.444549563 > 50.000000000
+[11:34:10.929] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:12.606] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:12.606] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:13.262] TRACE: PoolSize -> Pool size 541.444549563 > 50.000000000
+[11:34:13.262] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:14.943] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:14.943] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:15.743] TRACE: PoolSize -> Pool size 541.444549563 > 50.000000000
+[11:34:15.743] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:17.305] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:17.305] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:18.080] TRACE: PoolSize -> Pool size 541.424548392 > 50.000000000
+[11:34:18.080] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:19.666] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:19.666] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:20.399] TRACE: PoolSize -> Pool size 541.424548392 > 50.000000000
+[11:34:20.399] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:22.006] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:22.006] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:22.831] TRACE: PoolSize -> Pool size 541.424248323 > 50.000000000
+[11:34:22.831] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:24.345] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:24.345] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:25.201] TRACE: PoolSize -> Pool size 541.424148303 > 50.000000000
+[11:34:25.201] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:26.698] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:26.698] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:27.595] TRACE: PoolSize -> Pool size 541.424148303 > 50.000000000
+[11:34:27.595] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:29.030] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:29.030] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:29.984] TRACE: PoolSize -> Pool size 541.524148303 > 50.000000000
+[11:34:29.984] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:31.358] TRACE: PoolSize -> Pool size 0.704493073 < 5.000000000
+[11:34:31.358] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:32.329] TRACE: PoolSize -> Pool size 541.524148303 > 50.000000000
+[11:34:32.329] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:33.912] TRACE: PoolSize -> Pool size 0.734268073 < 5.000000000
+[11:34:33.912] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:34.812] TRACE: PoolSize -> Pool size 542.604131257 > 50.000000000
+[11:34:34.812] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:36.294] TRACE: PoolSize -> Pool size 0.734268073 < 5.000000000
+[11:34:36.294] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:37.322] TRACE: PoolSize -> Pool size 542.504738137 > 50.000000000
+[11:34:37.322] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:38.636] TRACE: PoolSize -> Pool size 0.734268073 < 5.000000000
+[11:34:38.636] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:39.802] TRACE: PoolSize -> Pool size 542.528738137 > 50.000000000
+[11:34:39.802] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:40.638] TRACE: Skipping buy because pool doesn't match filters
+    mint: "6JJKMw2Wfxv955a4PEv6U6LDJ9qgTHoLqdqbPpH7GGzC"
+[11:34:42.222] TRACE: PoolSize -> Pool size 542.528738137 > 50.000000000
+[11:34:42.222] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:44.532] TRACE: PoolSize -> Pool size 542.528738137 > 50.000000000
+[11:34:44.532] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:46.978] TRACE: PoolSize -> Pool size 542.528738137 > 50.000000000
+[11:34:46.978] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:49.323] TRACE: PoolSize -> Pool size 542.528738137 > 50.000000000
+[11:34:49.323] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:51.697] TRACE: PoolSize -> Pool size 542.528738137 > 50.000000000
+[11:34:51.697] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:54.019] TRACE: PoolSize -> Pool size 542.528738137 > 50.000000000
+[11:34:54.019] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:56.523] TRACE: PoolSize -> Pool size 542.528738137 > 50.000000000
+[11:34:56.523] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:34:59.082] TRACE: PoolSize -> Pool size 543.708738137 > 50.000000000
+[11:34:59.082] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:01.084] TRACE: Skipping buy because pool doesn't match filters
+    mint: "4CjYtAabbor8fFm6TjqtjbVhfSfzH4WEDchseHFoy2Rw"
+[11:35:11.521] TRACE: Caching new pool for mint: 6P8v3wUcCbmkqvXPuXG28DCEFyu5UCR5sTd1jPdhPUSs
+[11:35:11.524] TRACE: Processing new pool...
+    mint: "6P8v3wUcCbmkqvXPuXG28DCEFyu5UCR5sTd1jPdhPUSs"
+[11:35:11.524] DEBUG: Waiting for 2000 ms before buy
+    mint: "6P8v3wUcCbmkqvXPuXG28DCEFyu5UCR5sTd1jPdhPUSs"
+[11:35:13.526] INFO: Buying token...
+    mint: "6P8v3wUcCbmkqvXPuXG28DCEFyu5UCR5sTd1jPdhPUSs"
+[11:35:13.526] TRACE: Fetching new market keys for 9Vvgf6jxiDsJmQBEgtCXLwr9atvabT6vSEYxtLGVTXAK
+[11:35:14.634] TRACE: PoolSize -> Pool size 3.001000000 < 5.000000000
+[11:35:14.634] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:17.227] TRACE: PoolSize -> Pool size 3.299700000 < 5.000000000
+[11:35:17.227] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:19.748] TRACE: PoolSize -> Pool size 3.300000000 < 5.000000000
+[11:35:19.748] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:22.178] TRACE: PoolSize -> Pool size 3.399300000 < 5.000000000
+[11:35:22.178] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:24.502] TRACE: PoolSize -> Pool size 3.409700000 < 5.000000000
+[11:35:24.502] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:26.929] TRACE: PoolSize -> Pool size 3.410100000 < 5.000000000
+[11:35:26.929] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:29.222] TRACE: PoolSize -> Pool size 3.410100000 < 5.000000000
+[11:35:29.222] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:31.555] TRACE: PoolSize -> Pool size 3.410100000 < 5.000000000
+[11:35:31.555] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:33.881] TRACE: PoolSize -> Pool size 3.410100000 < 5.000000000
+[11:35:33.881] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:36.215] TRACE: PoolSize -> Pool size 3.410100000 < 5.000000000
+[11:35:36.215] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:38.537] TRACE: PoolSize -> Pool size 3.497291561 < 5.000000000
+[11:35:38.537] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:40.849] TRACE: PoolSize -> Pool size 3.497291561 < 5.000000000
+[11:35:40.849] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:43.159] TRACE: PoolSize -> Pool size 3.497291561 < 5.000000000
+[11:35:43.159] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:45.662] TRACE: PoolSize -> Pool size 3.497179849 < 5.000000000
+[11:35:45.662] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:47.968] TRACE: PoolSize -> Pool size 3.497179849 < 5.000000000
+[11:35:47.968] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:50.310] TRACE: PoolSize -> Pool size 3.393015349 < 5.000000000
+[11:35:50.310] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:52.662] TRACE: PoolSize -> Pool size 3.412910169 < 5.000000000
+[11:35:52.662] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:54.997] TRACE: PoolSize -> Pool size 3.412697441 < 5.000000000
+[11:35:54.997] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:57.325] TRACE: PoolSize -> Pool size 3.412697441 < 5.000000000
+[11:35:57.325] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:35:59.663] TRACE: PoolSize -> Pool size 3.412797441 < 5.000000000
+[11:35:59.663] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:36:02.000] TRACE: PoolSize -> Pool size 3.859740741 < 5.000000000
+[11:36:02.000] TRACE: Total Supply: [object Object] Accounts: [object Object]
+[11:36:04.324] TRACE: PoolSize -> Pool size 3.859740741 < 5.000000000
+[11:36:04.324] TRACE: Total Supply: [object Object] Accounts: [object Object]
