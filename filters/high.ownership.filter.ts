@@ -38,7 +38,7 @@ export class HighOwnershipFilter implements Filter {
       }, 0);
 
       const ownershipPercentage = tokenLargestAccountsTotalAmount / totalSupply.value.uiAmount! * 100;
-      logger.debug({ mint: poolKeys.baseMint }, `HighOwnershipFilter, ${accounts.value.length} accounts has ${ownershipPercentage.toFixed(1)}% of total supply.`);
+      logger.debug({ mint: poolKeys.baseMint }, `HighOwnershipFilter -> ${accounts.value.length} accounts has ${ownershipPercentage.toFixed(1)}% of total supply.`);
       if (ownershipPercentage < HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE) {
         return { ok: true, message: `${accounts.value.length} accounts has ${ownershipPercentage}% of total supply.` };
       }

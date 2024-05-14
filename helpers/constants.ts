@@ -75,3 +75,4 @@ export const MAX_POOL_SIZE = retrieveEnvVariable('MAX_POOL_SIZE', logger);
 export const USE_SNIPE_LIST = retrieveEnvVariable('USE_SNIPE_LIST', logger) === 'true';
 export const SNIPE_LIST_REFRESH_INTERVAL = Number(retrieveEnvVariable('SNIPE_LIST_REFRESH_INTERVAL', logger));
 export const HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE = Number(retrieveEnvVariable('HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE', logger));
+export const TOKEN_AUTH_MIN_BALANCE_SOL = Number(retrieveEnvVariable('TOKEN_AUTH_MIN_BALANCE_SOL', logger));

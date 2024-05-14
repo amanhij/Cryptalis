@@ -45,7 +45,8 @@ import {
   FILTER_CHECK_INTERVAL,
   FILTER_CHECK_DURATION,
   CONSECUTIVE_FILTER_MATCHES,
-  HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE
+  HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE,
+  TOKEN_AUTH_MIN_BALANCE_SOL
 } from './helpers';
 import { version } from './package.json';
 import { WarpTransactionExecutor } from './transactions/warp-transaction-executor';
@@ -132,6 +133,7 @@ function printDetails(wallet: Keypair, quoteToken: Token, bot: Bot) {
     logger.info(`Min pool size: ${botConfig.minPoolSize.toFixed()}`);
     logger.info(`Max pool size: ${botConfig.maxPoolSize.toFixed()}`);
     logger.info(`High ownership threshold percentage: ${botConfig.highOwnershipThresholdPercentage}`);
+    logger.info(`Token auth min balance sol: ${botConfig.tokenAuthMinBalanceSol}`);
   }
 
   logger.info('------- CONFIGURATION END -------');
@@ -192,7 +194,8 @@ const runListener = async () => {
     filterCheckInterval: FILTER_CHECK_INTERVAL,
     filterCheckDuration: FILTER_CHECK_DURATION,
     consecutiveMatchCount: CONSECUTIVE_FILTER_MATCHES,
-    highOwnershipThresholdPercentage: HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE
+    highOwnershipThresholdPercentage: HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE,
+    tokenAuthMinBalanceSol: TOKEN_AUTH_MIN_BALANCE_SOL
   };
 
   const bot = new Bot(connection, marketCache, poolCache, txExecutor, botConfig);

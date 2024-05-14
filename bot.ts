@@ -53,6 +53,7 @@ export interface BotConfig {
   filterCheckDuration: number;
   consecutiveMatchCount: number;
   highOwnershipThresholdPercentage: number;
+  tokenAuthMinBalanceSol: number;
 }
 
 export class Bot {

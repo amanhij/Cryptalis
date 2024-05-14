@@ -6,8 +6,9 @@ import { MutableFilter } from './mutable.filter';
 import { RenouncedFreezeFilter } from './renounced.filter';
 import { PoolSizeFilter } from './pool-size.filter';
 import { HighOwnershipFilter } from './high.ownership.filter';
-import { BURNED_PERCENTAGE_THRESHOLD, CHECK_IF_FREEZABLE, CHECK_IF_MINT_IS_RENOUNCED, CHECK_IF_MUTABLE, CHECK_IF_SOCIALS, HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE, logger } from '../helpers';
+import { BURNED_PERCENTAGE_THRESHOLD, CHECK_IF_FREEZABLE, CHECK_IF_MINT_IS_RENOUNCED, CHECK_IF_MUTABLE, CHECK_IF_SOCIALS, HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE, TOKEN_AUTH_MIN_BALANCE_SOL, logger } from '../helpers';
 import { ShyftBurnFilter } from './shyft.burn.filter';
+import { AuthBalanceFilter } from './auth.balance.filter';
 
 export interface Filter {
   execute(poolKeysV4: LiquidityPoolKeysV4): Promise<FilterResult>;
@@ -50,6 +51,10 @@ export class PoolFilters {
 
     if(HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE) {
       this.filters.push(new HighOwnershipFilter(connection));
+    }
+
+    if(TOKEN_AUTH_MIN_BALANCE_SOL) {
+      this.filters.push(new AuthBalanceFilter(connection, TOKEN_AUTH_MIN_BALANCE_SOL));
     }
   }
 
