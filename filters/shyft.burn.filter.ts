@@ -7,7 +7,7 @@ import { logger } from '../helpers';
 import { SHYFT_API_KEY, NETWORK } from '../helpers/constants';
 
 export class ShyftBurnFilter implements Filter {
-  private readonly gqlEndpoint = `https://programs.shyft.to/v0/graphql/?api_key=${SHYFT_API_KEY}&network=mainnet-beta`;
+  private readonly gqlEndpoint = `https://programs.shyft.to/v0/graphql/?api_key=${SHYFT_API_KEY}&network=${NETWORK}`;
 
   constructor(private readonly connection: Connection,
     private readonly burnedPercentageThreshold: number
