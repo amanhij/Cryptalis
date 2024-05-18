@@ -46,7 +46,8 @@ import {
   FILTER_CHECK_DURATION,
   CONSECUTIVE_FILTER_MATCHES,
   HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE,
-  TOKEN_AUTH_MIN_BALANCE_SOL
+  TOKEN_AUTH_MIN_BALANCE_SOL,
+  DEVELOPER_MODE
 } from './helpers';
 import { version } from './package.json';
 import { WarpTransactionExecutor } from './transactions/warp-transaction-executor';
@@ -112,7 +113,7 @@ function printDetails(wallet: Keypair, quoteToken: Token, bot: Bot) {
   logger.info(`Sell slippage: ${botConfig.sellSlippage}%`);
   logger.info(`Price check interval: ${botConfig.priceCheckInterval} ms`);
   logger.info(`Price check duration: ${botConfig.priceCheckDuration} ms`);
-  logger.info(`Take profit: ${botConfig.takeProfit}%`);
+  logger.info(`Take profit: ${JSON.stringify(botConfig.takeProfit)}%`);
   logger.info(`Stop loss: ${botConfig.stopLoss}%`);
 
   logger.info('- Snipe list -');
@@ -212,13 +213,10 @@ const runListener = async () => {
 
   const runTimestamp = Math.floor(new Date().getTime() / 1000);
   const listeners = new Listeners(connection);
-  await listeners.start({
-    walletPublicKey: wallet.publicKey,
-    quoteToken,
-    autoSell: AUTO_SELL,
-    cacheNewMarkets: CACHE_NEW_MARKETS,
-  });
 
+  if (DEVELOPER_MODE) {
+    bot.setListeners(listeners);
+  }
   listeners.on('market', (updatedAccountInfo: KeyedAccountInfo) => {
     const marketState = MARKET_STATE_LAYOUT_V3.decode(updatedAccountInfo.accountInfo.data);
     marketCache.save(updatedAccountInfo.accountId.toString(), marketState);
@@ -241,8 +239,15 @@ const runListener = async () => {
     if (accountData.mint.equals(quoteToken.mint)) {
       return;
     }
-
     await bot.sell(updatedAccountInfo.accountId, accountData);
+  });
+
+  // Start listeners
+  await listeners.start({
+    walletPublicKey: wallet.publicKey,
+    quoteToken,
+    autoSell: AUTO_SELL,
+    cacheNewMarkets: CACHE_NEW_MARKETS,
   });
 
   printDetails(wallet, quoteToken, bot);

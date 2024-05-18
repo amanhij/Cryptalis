@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { Commitment } from '@solana/web3.js';
 import { logger } from './logger';
 import { DEVNET_PROGRAM_ID, MAINNET_PROGRAM_ID } from '@raydium-io/raydium-sdk';
+import BN from 'bn.js';
 
 dotenv.config();
 
@@ -14,6 +15,24 @@ const retrieveEnvVariable = (variableName: string, logger: Logger) => {
   }
   return variable;
 };
+
+// Take profit configuration
+// ap: Amount of profit in percentage
+// pp: Price percentage to sell at
+export type TakeProfitType = {
+  ap: BN;
+  pp: BN;
+}[];
+
+function parseTakeProfit(value: string): TakeProfitType {
+  try {
+    const _ =  JSON.parse(value);
+    return _;
+  } catch (error) {
+    logger.error(`Failed to parse TAKE_PROFIT: ${error}`);
+    process.exit(1);
+  }
+}
 
 export const DEVELOPER_MODE: boolean = retrieveEnvVariable('DEVELOPER_MODE', logger) === 'true';
 
@@ -57,7 +76,7 @@ export const BUY_SLIPPAGE = Number(retrieveEnvVariable('BUY_SLIPPAGE', logger));
 export const AUTO_SELL = retrieveEnvVariable('AUTO_SELL', logger) === 'true';
 export const AUTO_SELL_DELAY = Number(retrieveEnvVariable('AUTO_SELL_DELAY', logger));
 export const MAX_SELL_RETRIES = Number(retrieveEnvVariable('MAX_SELL_RETRIES', logger));
-export const TAKE_PROFIT = Number(retrieveEnvVariable('TAKE_PROFIT', logger));
+export const TAKE_PROFIT: TakeProfitType = parseTakeProfit(retrieveEnvVariable('TAKE_PROFIT', logger));
 export const STOP_LOSS = Number(retrieveEnvVariable('STOP_LOSS', logger));
 export const PRICE_CHECK_INTERVAL = Number(retrieveEnvVariable('PRICE_CHECK_INTERVAL', logger));
 export const PRICE_CHECK_DURATION = Number(retrieveEnvVariable('PRICE_CHECK_DURATION', logger));

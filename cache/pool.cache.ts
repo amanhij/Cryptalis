@@ -1,5 +1,6 @@
-import { LiquidityStateV4 } from '@raydium-io/raydium-sdk';
+import { LIQUIDITY_STATE_LAYOUT_V4, LiquidityStateV4 } from '@raydium-io/raydium-sdk';
 import { logger } from '../helpers';
+import { AccountInfo, KeyedAccountInfo } from '@solana/web3.js';
 
 export class PoolCache {
   private readonly keys: Map<string, { id: string; state: LiquidityStateV4 }> = new Map<
@@ -14,7 +15,15 @@ export class PoolCache {
     }
   }
 
-  public async get(mint: string): Promise<{ id: string; state: LiquidityStateV4 }> {
+  public async get(mint: string, updatedAccountInfo?: KeyedAccountInfo): Promise<{ id: string; state: LiquidityStateV4 }> {
+    // if (!this.keys.has(mint)) {
+    //   // fetch new pool
+    //   const poolState = LIQUIDITY_STATE_LAYOUT_V4.decode(updatedAccountInfo!.accountInfo.data);
+    //   if (poolState) {
+    //     this.keys.set(mint, { id: updatedAccountInfo!.accountId.toString(), state: poolState });
+    //   }
+    // }
+
     return this.keys.get(mint)!;
   }
 }
