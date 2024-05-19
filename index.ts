@@ -214,9 +214,6 @@ const runListener = async () => {
   const runTimestamp = Math.floor(new Date().getTime() / 1000);
   const listeners = new Listeners(connection);
 
-  if (DEVELOPER_MODE) {
-    bot.setListeners(listeners);
-  }
   listeners.on('market', (updatedAccountInfo: KeyedAccountInfo) => {
     const marketState = MARKET_STATE_LAYOUT_V3.decode(updatedAccountInfo.accountInfo.data);
     marketCache.save(updatedAccountInfo.accountId.toString(), marketState);
