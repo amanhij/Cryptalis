@@ -585,7 +585,7 @@ export class Bot {
         console.log(this.config.quoteAmount.mul(pp).numerator.div(new BN(100)).add(this.config.quoteAmount.numerator).toString());
 
       } catch (error) {
-        debugger;
+        // debugger;
         console.log(error);
       }
 
