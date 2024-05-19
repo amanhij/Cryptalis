@@ -45,7 +45,7 @@ export class HighOwnershipFilter implements Filter {
 
       logger.info({ mint: poolKeys.baseMint }, `High amount of ownership detected, ${accounts.value.length} accounts has ${ownershipPercentage.toFixed(1)}% of total supply.`);
 
-      return { ok: false, message: `Total Supply: ${totalSupply.value.uiAmount} Accounts: ${accounts.value.length}` };
+      return { ok: false, message: `${accounts.value.length} accounts has ${ownershipPercentage}% of total supply.` };
     } catch (e: any) {
       if (e.code == -32602) {
         return { ok: true };

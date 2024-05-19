@@ -42,7 +42,7 @@ export class RenouncedFreezeFilter implements Filter {
         message.push('freeze');
       }
 
-      return { ok: ok, message: ok ? undefined : `RenouncedFreeze -> Creator can ${message.join(' and ')} tokens` };
+      return { ok: ok, message: ok ? `RenouncedFreeze -> Creator CANNOT mint OR freeze tokens` : `RenouncedFreeze -> Creator can ${message.join(' and ')} tokens` };
     } catch (e) {
       logger.error(
         { mint: poolKeys.baseMint },

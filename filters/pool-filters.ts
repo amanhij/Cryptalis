@@ -67,6 +67,8 @@ export class PoolFilters {
     const pass = result.every((r) => r.ok);
 
     if (pass) {
+      logger.trace('All filters passed');
+      // debugger;
       return true;
     }
 

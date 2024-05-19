@@ -71,7 +71,8 @@ export class ShyftBurnFilter implements Filter {
         const maxLpSupply = Math.max(actualSupply, (lpReserve - 1));
         const burnAmt = (maxLpSupply - actualSupply)
         console.log(`burn amt: ${burnAmt}`)
-        return (burnAmt / maxLpSupply) * 100;
+        const burnPct = (burnAmt / maxLpSupply) * 100;
+        return burnPct;
       }
 
       //Query the Shyft API to get the pool info
