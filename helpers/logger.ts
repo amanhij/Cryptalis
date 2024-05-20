@@ -8,16 +8,16 @@ const transport = pino.transport({
       options: {
         colorize: true,
       },
-      level: 'info',
+      level: process.env.LOG_LEVEL || 'info',
     },
     {
       target: 'pino/file',
       options: {
-        destination: './bot.log',
+        destination: `./log/bot.${new Date().toISOString().replace('T', ' ').split('.')[0]}.log`,
         mkdir: true, // Create the directory if it doesn't exist
         append: true, // Append to the file if it exists
       },
-      level: 'info',
+      level: process.env.LOG_LEVEL || 'info',
     }
   ]
 });
@@ -25,7 +25,7 @@ const transport = pino.transport({
 // Create the logger instance with the transport configuration
 export const logger = pino(
   {
-    level: 'info',
+    level: process.env.LOG_LEVEL || 'info',
     redact: ['poolKeys'],
     serializers: {
       error: pino.stdSerializers.err,

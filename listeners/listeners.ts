@@ -1,10 +1,10 @@
 import { LIQUIDITY_STATE_LAYOUT_V4, MARKET_STATE_LAYOUT_V3, Token } from '@raydium-io/raydium-sdk';
 import bs58 from 'bs58';
-import { Connection, KeyedAccountInfo, PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { EventEmitter } from 'events';
 import { RAYDIUM_PROGRAM_ID } from '../helpers/constants';
-import { Key } from '@metaplex-foundation/mpl-token-metadata';
+import { logger } from '../helpers';
 
 export class Listeners extends EventEmitter {
   private subscriptions: number[] = [];

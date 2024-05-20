@@ -143,6 +143,7 @@ export class Bot {
           logger.trace({ mint: poolKeys.baseMint.toString() }, `Skipping buy because pool doesn't match filters`);
           return;
         }
+        logger.debug({ mint: poolKeys.baseMint.toString() }, `Pool matched filters`);
       }
 
       for (let i = 0; i < this.config.maxBuyRetries; i++) {
@@ -429,10 +430,12 @@ export class Bot {
         );
 
         if (amountOut.lt(stopLoss)) {
+          logger.debug({ mint: poolKeys.baseMint.toString(), amountOut, amountIn }, `Selling because of stop loss`);
           break;
         }
 
         if (amountOut.gt(takeProfit)) {
+          logger.debug({ mint: poolKeys.baseMint.toString(), amountOut, amountIn }, `Selling because of take profit`);
           break;
         }
 

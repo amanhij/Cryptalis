@@ -69,8 +69,10 @@ export class ShyftBurnFilter implements Filter {
       */
       function getBurnPercentage(lpReserve: number, actualSupply: number): number {
         const maxLpSupply = Math.max(actualSupply, (lpReserve - 1));
-        const burnAmt = (maxLpSupply - actualSupply)
-        console.log(`burn amt: ${burnAmt}`)
+        const burnAmt = (maxLpSupply - actualSupply);
+        if (maxLpSupply <= 0) {
+          return 0;
+        };
         const burnPct = (burnAmt / maxLpSupply) * 100;
         return burnPct;
       }

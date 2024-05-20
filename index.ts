@@ -224,7 +224,9 @@ const runListener = async () => {
     const poolOpenTime = parseInt(poolState.poolOpenTime.toString());
     const exists = await poolCache.get(poolState.baseMint.toString());
 
+    // Pool is created after the bot started
     if (!exists && poolOpenTime > runTimestamp) {
+      logger.debug({accountId: updatedAccountInfo.accountId}, 'A new pool was found.');
       poolCache.save(updatedAccountInfo.accountId.toString(), poolState);
       await bot.buy(updatedAccountInfo.accountId, poolState);
     }
