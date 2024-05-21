@@ -16,14 +16,6 @@ export class PoolCache {
   }
 
   public async get(mint: string, updatedAccountInfo?: KeyedAccountInfo): Promise<{ id: string; state: LiquidityStateV4 }> {
-    // if (!this.keys.has(mint)) {
-    //   // fetch new pool
-    //   const poolState = LIQUIDITY_STATE_LAYOUT_V4.decode(updatedAccountInfo!.accountInfo.data);
-    //   if (poolState) {
-    //     this.keys.set(mint, { id: updatedAccountInfo!.accountId.toString(), state: poolState });
-    //   }
-    // }
-
     return this.keys.get(mint)!;
   }
 }

@@ -1,7 +1,7 @@
 import { MarketCache, PoolCache } from './cache';
 import { Listeners } from './listeners';
-import { Connection, KeyedAccountInfo, Keypair } from '@solana/web3.js';
-import { LIQUIDITY_STATE_LAYOUT_V4, MARKET_STATE_LAYOUT_V3, Token, TokenAmount } from '@raydium-io/raydium-sdk';
+import { Connection, KeyedAccountInfo, Keypair, PublicKey } from '@solana/web3.js';
+import { LIQUIDITY_STATE_LAYOUT_V4, LiquidityPoolKeysV4, MARKET_STATE_LAYOUT_V3, Token, TokenAmount } from '@raydium-io/raydium-sdk';
 import { AccountLayout, getAssociatedTokenAddressSync } from '@solana/spl-token';
 import { Bot, BotConfig } from './bot';
 import { DefaultTransactionExecutor, TransactionExecutor } from './transactions';
@@ -214,6 +214,8 @@ const runListener = async () => {
   const runTimestamp = Math.floor(new Date().getTime() / 1000);
   const listeners = new Listeners(connection);
 
+  bot.setListeners(listeners);
+
   listeners.on('market', (updatedAccountInfo: KeyedAccountInfo) => {
     const marketState = MARKET_STATE_LAYOUT_V3.decode(updatedAccountInfo.accountInfo.data);
     marketCache.save(updatedAccountInfo.accountId.toString(), marketState);
@@ -239,6 +241,16 @@ const runListener = async () => {
       return;
     }
     await bot.sell(updatedAccountInfo.accountId, accountData);
+  });
+
+  listeners.on('buy-after-sell', async (
+    poolKeys: LiquidityPoolKeysV4,
+    accountId: PublicKey,
+    tokenIn: Token,
+    tokenAmountIn, // <= amout of token sold in the sell
+    amountOut // <= amout of SOL received in the sell
+  ) => {
+    await bot.buyAfterSell(poolKeys, accountId, tokenIn, tokenAmountIn, amountOut);
   });
 
   // Start listeners

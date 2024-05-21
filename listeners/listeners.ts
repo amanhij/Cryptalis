@@ -1,6 +1,6 @@
 import { LIQUIDITY_STATE_LAYOUT_V4, MARKET_STATE_LAYOUT_V3, Token } from '@raydium-io/raydium-sdk';
 import bs58 from 'bs58';
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection, KeyedAccountInfo, PublicKey } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { EventEmitter } from 'events';
 import { RAYDIUM_PROGRAM_ID } from '../helpers/constants';
@@ -85,34 +85,24 @@ export class Listeners extends EventEmitter {
 
   private async subscribeToWalletChanges(config: { walletPublicKey: PublicKey, quoteToken: Token}) {
 
-    /** 
-    // Emit current owned tokens on start
-    const tokenAccounts = await this.connection.getTokenAccountsByOwner(
-      config.walletPublicKey,
-      { programId: TOKEN_PROGRAM_ID },
-    );
+    // // Emit current owned tokens on start to sell
+    // // TODO: Set the poolCashe for the baseMint and quoteMint
+    // const tokenAccounts = await this.connection.getTokenAccountsByOwner(
+    //   config.walletPublicKey,
+    //   { programId: TOKEN_PROGRAM_ID },
+    // );
 
-    for (const tokenAcc of tokenAccounts.value) {
-      const parsedAccInfo = await this.connection.getParsedAccountInfo(tokenAcc.pubkey);
+    // for (const tokenAcc of tokenAccounts.value) {
+    //   // get token account of the wallet
+    //   const accountInfo = await this.connection.getAccountInfo(tokenAcc.pubkey);
 
-      // Get token mint
-      const mint = parsedAccInfo.value?.data?.parsed?.info.mint;
-
-      // ignore Quote token
-      if (mint === config.quoteToken.mint.toBase58()) {
-        continue;
-      }
-
-      const accountInfo = await this.connection.getAccountInfo(tokenAcc.pubkey);
-
-      const keyedAccountInfo: KeyedAccountInfo = {
-        accountId: tokenAcc.pubkey,
-        accountInfo: accountInfo!,
-      };
+    //   const keyedAccountInfo: KeyedAccountInfo = {
+    //     accountId: tokenAcc.pubkey,
+    //     accountInfo: accountInfo!,
+    //   };
       
-      this.emit('wallet', keyedAccountInfo);
-    }
-    */
+    //   this.emit('wallet', keyedAccountInfo);
+    // }
 
     return this.connection.onProgramAccountChange(
       TOKEN_PROGRAM_ID,

@@ -2,7 +2,6 @@ import { Filter, FilterResult } from './pool-filters';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { LiquidityPoolKeysV4 } from '@raydium-io/raydium-sdk';
 import { logger } from '../helpers';
-// import { gql, GraphQLClient } from "graphql-request";
 
 import { SHYFT_API_KEY, NETWORK } from '../helpers/constants';
 
@@ -79,7 +78,7 @@ export class ShyftBurnFilter implements Filter {
 
       //Query the Shyft API to get the pool info
       const info = await this.queryLpMintInfo(poolKeys.id.toBase58());
-      const lpMint = info.Raydium_LiquidityPoolv4[0].lpMint
+      const { lpMint } = info.Raydium_LiquidityPoolv4[0]
 
       logger.debug({ lpMint }, `Fetching Parsed Account Info for...`);
       //Once we have the lpMint address, we need to fetch the current token supply and decimals
