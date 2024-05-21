@@ -15,6 +15,25 @@ export class HighOwnershipFilter implements Filter {
     try {
       const { lpMint, baseMint } = poolKeys;
 
+      const totalSupply = await this.connection.getTokenSupply(baseMint, this.connection.commitment);
+
+      // All minted tokens used to create the pool ?
+      const baseVaultBalance = await this.connection.getTokenAccountBalance(poolKeys.baseVault, this.connection.commitment)
+
+      const percentOfTotalSupplyUsedByPool = baseVaultBalance.value.uiAmount! / totalSupply.value.uiAmount! * 100;
+
+      // TODO: use ENV variable not 99.9
+      if (percentOfTotalSupplyUsedByPool < 99.9) {
+        logger.debug({ 
+          mint: poolKeys.baseMint,
+          baseVaultBalanceUi: baseVaultBalance.value.uiAmount,
+          totalSupplyUi: totalSupply.value.uiAmount,
+          percentOfTotalSupplyUsedByPool: percentOfTotalSupplyUsedByPool
+        }, `HighOwnershipFilter -> All minted tokens are not used to create the pool.`);
+        return { ok: false, message: `All minted tokens are not used to create the pool.` };
+      }
+
+
       // Raydium authority token account
       const raydiumAuthorityTokenAccount = await this.connection.getTokenAccountsByOwner(HighOwnershipFilter.RAYDIUM_AUTHORITY_V4, { mint: poolKeys.baseMint }, this.connection.commitment);
 
@@ -30,12 +49,11 @@ export class HighOwnershipFilter implements Filter {
         });
       }
 
-      const totalSupply = await this.connection.getTokenSupply(baseMint, this.connection.commitment);
-
       // Check if the top account holds more than <HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE> of the total supply
       const tokenLargestAccountsTotalAmount = accounts.value.reduce((acc: number, tokenBalancePair: TokenAccountBalancePair) => {
         return acc + (tokenBalancePair.uiAmount ? tokenBalancePair.uiAmount : 0);
       }, 0);
+
 
       const ownershipPercentage = tokenLargestAccountsTotalAmount / totalSupply.value.uiAmount! * 100;
       logger.debug({ mint: poolKeys.baseMint }, `HighOwnershipFilter -> ${accounts.value.length} accounts has ${ownershipPercentage.toFixed(1)}% of total supply.`);
@@ -43,7 +61,7 @@ export class HighOwnershipFilter implements Filter {
         return { ok: true, message: `${accounts.value.length} accounts has ${ownershipPercentage}% of total supply.` };
       }
 
-      logger.info({ pool: poolKeys.id, mint: poolKeys.baseMint }, `High amount of ownership detected, ${accounts.value.length} accounts has ${ownershipPercentage.toFixed(1)}% of total supply.`);
+      logger.debug({ pool: poolKeys.id, mint: poolKeys.baseMint }, `High amount of ownership detected, ${accounts.value.length} accounts has ${ownershipPercentage.toFixed(1)}% of total supply.`);
 
       return { ok: false, message: `${accounts.value.length} accounts has ${ownershipPercentage}% of total supply.` };
     } catch (e: any) {

@@ -109,7 +109,7 @@ export class ShyftBurnFilter implements Filter {
         return { ok: true };
       }
 
-      logger.error({ mint: poolKeys.baseMint }, `Shyft Failed to check if LP is burned`);
+      logger.error({ mint: poolKeys.baseMint, err: e }, `Shyft Failed to check if LP is burned`);
     }
 
     return { ok: false, message: 'Shyft Failed to check if LP is burned' };

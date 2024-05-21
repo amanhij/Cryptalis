@@ -154,7 +154,7 @@ export class Bot {
           logger.trace({ mint: poolKeys.baseMint.toString() }, `Skipping buy because pool doesn't match filters`);
           return;
         }
-        logger.debug({ mint: poolKeys.baseMint.toString() }, `Pool matched filters`);
+        logger.debug({ mint: poolKeys.baseMint.toString(), poolId: poolKeys.id.toString() }, `Pool matched filters`);
       }
 
       for (let i = 0; i < this.config.maxBuyRetries; i++) {
