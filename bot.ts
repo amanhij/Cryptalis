@@ -244,7 +244,7 @@ export class Bot {
             mintAta,
             this.config.quoteToken,
             tokenOut,
-            this.config.quoteAmount,
+            quoteAmount,
             this.config.buySlippage,
             this.config.wallet,
             'buy',
