@@ -8,6 +8,7 @@ const lastSignals: Map<string, string> = new Map();
 
 export async function executeTradingSignals() {
 
+  logger.debug('Executing trading signals');
   // Get all tokens from the cache and generate signals accordingly
   const tokens = getBaseTokens();
   tokens.forEach(token => {

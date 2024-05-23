@@ -181,7 +181,7 @@ export class Listeners extends EventEmitter {
         try {
           const from = Date.now() - this.MIN_1;
           const to = Date.now()
-          await this.fetchTokenPrice(await mint, from, to);
+          await this.fetchTokenPrice(mint, from, to);
           await executeTradingSignals();
         } catch (error) {
           logger.error(`Failed to fetch price for mint: ${mint} - ${error}`);
