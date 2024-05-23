@@ -1,11 +1,8 @@
 import { Logger } from 'pino';
-import dotenv from 'dotenv';
 import { Commitment } from '@solana/web3.js';
 import { logger } from './logger';
 import { DEVNET_PROGRAM_ID, MAINNET_PROGRAM_ID } from '@raydium-io/raydium-sdk';
 import BN from 'bn.js';
-
-dotenv.config();
 
 const retrieveEnvVariable = (variableName: string, logger: Logger) => {
   const variable = process.env[variableName] || '';
@@ -79,3 +76,4 @@ export const USE_SNIPE_LIST = retrieveEnvVariable('USE_SNIPE_LIST', logger) === 
 export const SNIPE_LIST_REFRESH_INTERVAL = Number(retrieveEnvVariable('SNIPE_LIST_REFRESH_INTERVAL', logger));
 export const HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE = Number(retrieveEnvVariable('HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE', logger));
 export const TOKEN_AUTH_MIN_BALANCE_SOL = Number(retrieveEnvVariable('TOKEN_AUTH_MIN_BALANCE_SOL', logger));
+export const TOKEN_PERCENTAGE_ALLOCATED_TO_POOL = Number(retrieveEnvVariable('TOKEN_PERCENTAGE_ALLOCATED_TO_POOL', logger));

@@ -25,7 +25,6 @@ import { Mutex } from 'async-mutex';
 import BN from 'bn.js';
 import { WarpTransactionExecutor } from './transactions/warp-transaction-executor';
 import { JitoTransactionExecutor } from './transactions/jito-rpc-transaction-executor';
-import { Listeners } from './listeners';
 
 export interface BotConfig {
   wallet: Keypair;
@@ -57,6 +56,7 @@ export interface BotConfig {
   consecutiveMatchCount: number;
   highOwnershipThresholdPercentage: number;
   tokenAuthMinBalanceSol: number;
+  tokenPercentAllocatedToPool: number;
 }
 
 export class Bot {
@@ -70,7 +70,6 @@ export class Bot {
   private sellExecutionCount = 0;
   public readonly isWarp: boolean = false;
   public readonly isJito: boolean = false;
-  public listeners: Listeners | undefined;
 
   private tokenSoldMap: Map<string, TokenAmount> = new Map<string, TokenAmount>();
 
@@ -95,11 +94,6 @@ export class Bot {
       this.snipeListCache = new SnipeListCache();
       this.snipeListCache.init();
     }
-  }
-
-
-  public setListeners(listeners: Listeners) {
-    this.listeners = listeners;
   }
 
   async validate() {
@@ -210,76 +204,6 @@ export class Bot {
     }
   }
 
-  /**
-   * 
-   * @param poolKeys 
-   * @param accountId 
-   * @param tokenIn 
-   * @param tokenAmount amout of token sold in the sell
-   * @param quoteAmount amout of SOL received in the sell
-   */
-  public async buyAfterSell(
-    poolKeys: LiquidityPoolKeysV4,
-    accountId: PublicKey,
-    tokenIn: Token,
-    tokenAmount: TokenAmount,// <= amout of token sold in the sell
-    quoteAmount: TokenAmount // <= amout of SOL received in the sell
-  ) {
-
-    this.priceMatchToBuyAgainAfterSell(quoteAmount, tokenAmount, poolKeys);
-    logger.trace({ mint: poolKeys.baseMint }, `Buying token After Sell ...`);
-    const mintAta = await getAssociatedTokenAddress(poolKeys.baseMint, this.config.wallet.publicKey);
-    try {
-
-      for (let i = 0; i < this.config.maxBuyRetries; i++) {
-        try {
-          logger.info(
-            { mint: poolKeys.baseMint.toString() },
-            `Send buy transaction attempt: ${i + 1}/${this.config.maxBuyRetries}`,
-          );
-          const tokenOut = new Token(TOKEN_PROGRAM_ID, poolKeys.baseMint, poolKeys.baseDecimals);
-          const { result } = await this.swap(
-            poolKeys,
-            this.config.quoteAta,
-            mintAta,
-            this.config.quoteToken,
-            tokenOut,
-            quoteAmount,
-            this.config.buySlippage,
-            this.config.wallet,
-            'buy',
-          );
-
-          if (result.confirmed) {
-            logger.info(
-              {
-                mint: poolKeys.baseMint.toString(),
-                signature: result.signature,
-                url: `https://solscan.io/tx/${result.signature}?cluster=${NETWORK}`,
-              },
-              `Confirmed buy tx`,
-            );
-
-            break;
-          }
-
-          logger.info(
-            {
-              mint: poolKeys.baseMint.toString(),
-              signature: result.signature,
-              error: result.error,
-            },
-            `Error confirming buy tx`,
-          );
-        } catch (error) {
-          logger.debug({ mint: poolKeys.baseMint.toString(), error }, `Error confirming buy transaction`);
-        }
-      }
-    } catch (error) {
-      logger.error({ mint: poolKeys.baseMint.toString(), error }, `Failed to buy token`);
-    }
-  }
-
   public async sell(accountId: PublicKey, rawAccount: RawAccount) {
     if (this.config.oneTokenAtATime) {
       this.sellExecutionCount++;
@@ -343,19 +267,6 @@ export class Bot {
               `Confirmed sell tx`,
             );
 
-            // Sell is confirmed, emit a signal to buy the token again at the initial buy price
-            if (this.config.autoSell) {
-              // Add the sold token amount to the lastTokenSwappedAmounts
-              this.tokenSoldMap.set(tokenIn.mint.toString(), tokenAmountIn);
-              // fetch the wallet token account
-              this.listeners!.emit('buy-after-sell',
-                poolKeys,
-                accountId,
-                tokenIn,
-                tokenAmountIn, // <= amout of token sold in the sell
-                amountOut // <= amout of SOL received in the sell
-              );
-            }
             break;
           }
 
@@ -537,78 +448,6 @@ export class Bot {
           logger.debug({ mint: poolKeys.baseMint.toString(), amountOut, amountIn }, `Selling because of take profit`);
           break;
         }
-
-        await sleep(this.config.priceCheckInterval);
-      } catch (e) {
-        logger.trace({ mint: poolKeys.baseMint.toString(), e }, `Failed to check token price`);
-      } finally {
-        timesChecked++;
-      }
-    } while (timesChecked < timesToCheck);
-  }
-
-  // Used by buyAfterSell, the token is sold, and the bot will wait to buy it again
-  // if the price is right.
-  // For `config.QUOTE_AMOUNT` amount of quote token, it should get more than it sold.
-  //
-  // When a token is sold, the bot will wait to buy more Token than it sold at the same amount of SOL.
-  // etc.
-  // 1COIN last sold amount = 1000 
-  // tokenSoldMap.get("BtCBZe1EQvzRP1re4nQdGPmdYZncHaKzDeg4SSBmoMUh") => 1000
-  // the next buy should get more than 1000 1COIN tokens.
-  // Wait for the price to be right.
-  // If it doesn't get more than it sold, it won't wait for the price to be right.
-
-  private async priceMatchToBuyAgainAfterSell(
-    quoteAmount: TokenAmount,
-    tokenAmount: TokenAmount,
-    poolKeys: LiquidityPoolKeysV4) {
-    if (this.config.priceCheckDuration === 0 || this.config.priceCheckInterval === 0) {
-      return;
-    }
-
-    const timesToCheck = this.config.priceCheckDuration / this.config.priceCheckInterval;
-
-    const slippage = new Percent(this.config.sellSlippage, 100);
-    let timesChecked = 0;
-
-    do {
-      try {
-        const poolInfo = await Liquidity.fetchInfo({
-          connection: this.connection,
-          poolKeys,
-        });
-
-        const amountOut = Liquidity.computeAmountOut({
-          poolKeys,
-          poolInfo,
-          amountIn: quoteAmount,
-          currencyOut: this.config.quoteToken,
-          slippage,
-        }).amountOut;
-
-        if (amountOut.raw.gte(tokenAmount.raw)) {
-          logger.debug(
-            {
-              mint: poolKeys.baseMint.toString(),
-              tokenAmount: tokenAmount.toFixed(),
-              quoteAmount: quoteAmount.toFixed(),
-              currentTokenAmount: amountOut.toFixed(),
-            },
-            `Bot can get more token than it sold`,
-          );
-          break;
-        }
-
-        logger.debug(
-          {
-            mint: poolKeys.baseMint.toString(),
-            tokenAmount: tokenAmount.toFixed(),
-            quoteAmount: quoteAmount.toFixed(),
-            currentTokenAmount: amountOut.toFixed(),
-          },
-          `Bot get LESS token than it sold`,
-        );
 
         await sleep(this.config.priceCheckInterval);
       } catch (e) {

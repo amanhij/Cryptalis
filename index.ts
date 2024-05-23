@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { MarketCache, PoolCache } from './cache';
 import { Listeners } from './listeners';
 import { Connection, KeyedAccountInfo, Keypair, PublicKey } from '@solana/web3.js';
@@ -47,6 +49,7 @@ import {
   CONSECUTIVE_FILTER_MATCHES,
   HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE,
   TOKEN_AUTH_MIN_BALANCE_SOL,
+  TOKEN_PERCENTAGE_ALLOCATED_TO_POOL,
   DEVELOPER_MODE
 } from './helpers';
 import { version } from './package.json';
@@ -135,6 +138,7 @@ function printDetails(wallet: Keypair, quoteToken: Token, bot: Bot) {
     logger.info(`Max pool size: ${botConfig.maxPoolSize.toFixed()}`);
     logger.info(`High ownership threshold percentage: ${botConfig.highOwnershipThresholdPercentage}`);
     logger.info(`Token auth min balance sol: ${botConfig.tokenAuthMinBalanceSol}`);
+    logger.info(`Tokens allocation to pool percentage MIN: ${botConfig.tokenPercentAllocatedToPool}`);
   }
 
   logger.info('------- CONFIGURATION END -------');
@@ -196,7 +200,8 @@ const runListener = async () => {
     filterCheckDuration: FILTER_CHECK_DURATION,
     consecutiveMatchCount: CONSECUTIVE_FILTER_MATCHES,
     highOwnershipThresholdPercentage: HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE,
-    tokenAuthMinBalanceSol: TOKEN_AUTH_MIN_BALANCE_SOL
+    tokenAuthMinBalanceSol: TOKEN_AUTH_MIN_BALANCE_SOL,
+    tokenPercentAllocatedToPool: TOKEN_PERCENTAGE_ALLOCATED_TO_POOL,
   };
 
   const bot = new Bot(connection, marketCache, poolCache, txExecutor, botConfig);
@@ -212,9 +217,7 @@ const runListener = async () => {
   }
 
   const runTimestamp = Math.floor(new Date().getTime() / 1000);
-  const listeners = new Listeners(connection);
-
-  bot.setListeners(listeners);
+  const listeners = new Listeners(connection, botConfig);
 
   listeners.on('market', (updatedAccountInfo: KeyedAccountInfo) => {
     const marketState = MARKET_STATE_LAYOUT_V3.decode(updatedAccountInfo.accountInfo.data);
@@ -234,24 +237,15 @@ const runListener = async () => {
     }
   });
 
-  listeners.on('wallet', async (updatedAccountInfo: KeyedAccountInfo) => {
-    const accountData = AccountLayout.decode(updatedAccountInfo.accountInfo.data);
+  // TODO: Don't sell, I'll implement a new strategy that follows price actions
+  // listeners.on('wallet', async (updatedAccountInfo: KeyedAccountInfo) => {
+  //   const accountData = AccountLayout.decode(updatedAccountInfo.accountInfo.data);
 
-    if (accountData.mint.equals(quoteToken.mint)) {
-      return;
-    }
-    await bot.sell(updatedAccountInfo.accountId, accountData);
-  });
-
-  listeners.on('buy-after-sell', async (
-    poolKeys: LiquidityPoolKeysV4,
-    accountId: PublicKey,
-    tokenIn: Token,
-    tokenAmountIn, // <= amout of token sold in the sell
-    amountOut // <= amout of SOL received in the sell
-  ) => {
-    await bot.buyAfterSell(poolKeys, accountId, tokenIn, tokenAmountIn, amountOut);
-  });
+  //   if (accountData.mint.equals(quoteToken.mint)) {
+  //     return;
+  //   }
+  //   await bot.sell(updatedAccountInfo.accountId, accountData);
+  // });
 
   // Start listeners
   await listeners.start({

@@ -6,7 +6,7 @@ import { MutableFilter } from './mutable.filter';
 import { RenouncedFreezeFilter } from './renounced.filter';
 import { PoolSizeFilter } from './pool-size.filter';
 import { HighOwnershipFilter } from './high.ownership.filter';
-import { BURNED_PERCENTAGE_THRESHOLD, CHECK_IF_FREEZABLE, CHECK_IF_MINT_IS_RENOUNCED, CHECK_IF_MUTABLE, CHECK_IF_SOCIALS, HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE, TOKEN_AUTH_MIN_BALANCE_SOL, logger } from '../helpers';
+import { BURNED_PERCENTAGE_THRESHOLD, CHECK_IF_FREEZABLE, CHECK_IF_MINT_IS_RENOUNCED, CHECK_IF_MUTABLE, CHECK_IF_SOCIALS, HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE, TOKEN_AUTH_MIN_BALANCE_SOL, TOKEN_PERCENTAGE_ALLOCATED_TO_POOL, logger } from '../helpers';
 import { ShyftBurnFilter } from './shyft.burn.filter';
 import { AuthBalanceFilter } from './auth.balance.filter';
 
@@ -49,11 +49,11 @@ export class PoolFilters {
       this.filters.push(new PoolSizeFilter(connection, args.quoteToken, args.minPoolSize, args.maxPoolSize));
     }
 
-    if(HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE) {
-      this.filters.push(new HighOwnershipFilter(connection));
+    if (HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE) {
+      this.filters.push(new HighOwnershipFilter(connection, TOKEN_PERCENTAGE_ALLOCATED_TO_POOL));
     }
 
-    if(TOKEN_AUTH_MIN_BALANCE_SOL) {
+    if (TOKEN_AUTH_MIN_BALANCE_SOL) {
       this.filters.push(new AuthBalanceFilter(connection, TOKEN_AUTH_MIN_BALANCE_SOL));
     }
   }
