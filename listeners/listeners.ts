@@ -4,10 +4,12 @@ import { Connection, PublicKey } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { EventEmitter } from 'events';
 import { RAYDIUM_PROGRAM_ID } from '../helpers/constants';
-import { logger } from '../helpers';
+import { fetchOwnedTokenMints, logger } from '../helpers';
 import { BotConfig } from '../bot';
 import { OHLC, setOhlc } from '../cache/price.cache';
 import { executeTradingSignals } from '../trading-signals';
+import { shyftQueryLpByBaseAndQuoteMint } from '../helpers/shyfy';
+import { updateSubscriptions } from './bds.ws';
 
 export class Listeners extends EventEmitter {
   private subscriptions: number[] = [];
@@ -132,102 +134,15 @@ export class Listeners extends EventEmitter {
     );
   }
 
-  private readonly MIN_1 = 60 * 1000;
-
-  // subscribe to price feed for the tokens in the wallet
   private async subscribeToPriceFeed() {
+    // 1. Fetch all token mints owned by the wallet
+    const baseMints = await fetchOwnedTokenMints(this.connection, this.botConfig.wallet.publicKey, this.botConfig.quoteToken.mint);
 
+    // 2. Fetch Pool Ids for each token mint
+    const poolIds = await shyftQueryLpByBaseAndQuoteMint(baseMints, this.botConfig.quoteToken.mint.toBase58());
 
-    const tokenAccounts = await this.connection.getTokenAccountsByOwner(
-      this.botConfig.wallet.publicKey,
-      { programId: TOKEN_PROGRAM_ID },
-    );
-
-    let mints = await Promise.all(tokenAccounts.value.map(async (tokenAccount) => {
-      // get spl token address for each token account
-      const parsedTokenAccount = await this.connection.getParsedAccountInfo(tokenAccount.pubkey);
-      // @ts-ignore
-      const { mint } = parsedTokenAccount?.value?.data?.parsed!.info;
-
-      // exclude quote token
-      if (mint === this.botConfig.quoteToken.mint.toBase58()) {
-        return;
-      }
-
-      return mint;
-    }))
-    
-    mints = mints.filter((mint) => mint);
-
-    // fetch price for each token account
-    for (const mint of mints) {
-
-      try {
-        const MOTH_1 = 30 * 24 * 60 * 60 * 1000;
-
-        const from = Math.floor((Date.now() - MOTH_1) / 1000);
-        const to = Math.floor(Date.now() / 1000)
-        await this.fetchTokenPrice(mint, from, to);
-      } catch (error) {
-        logger.error(`Failed to fetch price for mint: ${mint} - ${error}`);
-      }
-    }
-
-    return setInterval(async () => {
-      // For each token account,
-      // get price from Liquidity Pool
-      for (const mint of mints) {
-
-        try {
-          const from = Date.now() - this.MIN_1;
-          const to = Date.now()
-          await this.fetchTokenPrice(mint, from, to);
-          await executeTradingSignals();
-        } catch (error) {
-          logger.error(`Failed to fetch price for mint: ${mint} - ${error}`);
-        }
-      }
-    }, this.MIN_1);
-  }
-
-  public async fetchTokenPrice(mint: string, from: number, to: number){
-    const query = new URLSearchParams()
-    query.append('base_address', this.botConfig.quoteToken.mint.toBase58())
-    query.append('quote_address', mint)
-    query.append('type', '1m')
-    // query.append('time_from', Math.floor((Date.now() - this.MIN_1) / 1000).toString())
-    // query.append('time_to', Math.floor(Date.now() / 1000).toString())
-    query.append('time_from', from.toString())
-    query.append('time_to', to.toString())
-    const url = `${process.env.BIRDEYE_API}/defi/ohlcv/base_quote?${query.toString()}`
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-API-KEY': process.env.BIRDEYE_API_KEY!,
-        'x-chain': 'solana'
-      },
-
-    })
-    if (!res.ok) {
-      console.error(res.statusText)
-      throw new Error(`Failed to fetch OHLC from Birdeye API url:${url}`)
-    }
-    const json: any = await res.json()
-    logger.debug(`Fetched OHLC for mint: ${mint} - ${json.data.items.length}`)
-
-    json.data.items.forEach((item: any) => {
-      try {
-        const { o, h, l, c } = item
-        const ohlc: OHLC = { o, h, l, c }
-  
-        setOhlc(mint, item.unixTime, ohlc)
-        
-      } catch (error) {
-        logger.error(`Failed to set OHLC for mint: ${mint} - ${error}`);        
-      }
-    })
-
+    // 3. Subscribe to price feed for each Pool Id
+    await updateSubscriptions(poolIds);
   }
 
   public async stop() {

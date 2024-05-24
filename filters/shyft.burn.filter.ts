@@ -3,62 +3,14 @@ import { Connection, PublicKey } from '@solana/web3.js';
 import { LiquidityPoolKeysV4 } from '@raydium-io/raydium-sdk';
 import { logger } from '../helpers';
 
-import { SHYFT_API_KEY, NETWORK } from '../helpers/constants';
+import { shyftQueryLpMintInfo } from '../helpers/shyfy';
 
 export class ShyftBurnFilter implements Filter {
-  private readonly gqlEndpoint = `https://programs.shyft.to/v0/graphql/?api_key=${SHYFT_API_KEY}&network=${NETWORK}`;
 
   constructor(private readonly connection: Connection,
     private readonly burnedPercentageThreshold: number
   ) { }
 
-  async queryLpMintInfo(address: string) {
-    // See how we are only querying what we need
-    const query = `
-      query MyQuery ($where: Raydium_LiquidityPoolv4_bool_exp) {
-    Raydium_LiquidityPoolv4(
-      where: $where
-    ) {
-      baseMint
-      lpMint
-      lpReserve
-    }
-  }`;
-
-    const variables = {
-      where: {
-        pubkey: {
-          _eq: address,
-        },
-      },
-    };
-
-    try {
-
-      const res = await fetch(this.gqlEndpoint, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          query,
-          variables,
-        }),
-      })
-
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-
-      const json = await res.json();
-
-      return json.data;
-
-    } catch (error) {
-      logger.error(`Shyft failed to query LP mint info: ${error}`);
-      throw error;
-    }
-  }
 
   async execute(poolKeys: LiquidityPoolKeysV4): Promise<FilterResult> {
     try {
@@ -77,7 +29,7 @@ export class ShyftBurnFilter implements Filter {
       }
 
       //Query the Shyft API to get the pool info
-      const info = await this.queryLpMintInfo(poolKeys.id.toBase58());
+      const info = await shyftQueryLpMintInfo(poolKeys.id.toBase58());
       const { lpMint } = info.Raydium_LiquidityPoolv4[0]
 
       logger.debug({ lpMint }, `Fetching Parsed Account Info for...`);
@@ -96,7 +48,7 @@ export class ShyftBurnFilter implements Filter {
       //Calculate burn percentage
       const burnPct = getBurnPercentage(lpReserve, actualSupply)
 
-      logger.debug({ burnPct, burnedPercentageThreshold: this.burnedPercentageThreshold }, `Pool Burn Percentage reported by Shyft`);
+      logger.debug({poolId: poolKeys.id, burnPct, burnedPercentageThreshold: this.burnedPercentageThreshold }, `Pool Burn Percentage reported by Shyft`);
 
       if (burnPct > this.burnedPercentageThreshold) {
         return { ok: true, message: `ShyftBurnFilter -> Burned Percentage ${burnPct} > ${this.burnedPercentageThreshold}` };

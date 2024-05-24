@@ -27,6 +27,7 @@ export class HighOwnershipFilter implements Filter {
       // TODO: use ENV variable not 99.9
       if (percentOfTotalSupplyUsedByPool < this.tokenPercentageAllocatedToPool) {
         logger.debug({ 
+          poolId: poolKeys.id,
           mint: poolKeys.baseMint,
           baseVaultBalanceUi: baseVaultBalance.value.uiAmount,
           totalSupplyUi: totalSupply.value.uiAmount,

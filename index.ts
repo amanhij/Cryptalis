@@ -55,6 +55,7 @@ import {
 import { version } from './package.json';
 import { WarpTransactionExecutor } from './transactions/warp-transaction-executor';
 import { JitoTransactionExecutor } from './transactions/jito-rpc-transaction-executor';
+import { updateSubscriptions } from './listeners/bds.ws';
 
 const connection = new Connection(RPC_ENDPOINT, {
   wsEndpoint: RPC_WEBSOCKET_ENDPOINT,
@@ -246,6 +247,11 @@ const runListener = async () => {
   //   }
   //   await bot.sell(updatedAccountInfo.accountId, accountData);
   // });
+
+  listeners.on('wallet', async (updatedAccountInfo: KeyedAccountInfo) => {
+    // Update price feed for the tokens in the wallet
+    updateSubscriptions(botConfig.wallet.publicKey);
+  });
 
   // Start listeners
   await listeners.start({
