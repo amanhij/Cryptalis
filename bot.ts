@@ -204,7 +204,7 @@ export class Bot {
     }
   }
 
-  public async sell(accountId: PublicKey, rawAccount: RawAccount) {
+  public async sell(accountId: PublicKey, rawAccount: RawAccount, buyTimestamp: number) {
     if (this.config.oneTokenAtATime) {
       this.sellExecutionCount++;
     }
@@ -212,7 +212,7 @@ export class Bot {
     try {
       logger.trace({ mint: rawAccount.mint }, `Processing new token...`);
 
-      const poolData = await this.poolStorage.get(rawAccount.mint.toString());
+      const poolData = await this.poolStorage.get(rawAccount.mint.toString(), true);
 
       if (!poolData) {
         logger.trace({ mint: rawAccount.mint.toString() }, `Token pool data is not found, can't sell`);
@@ -235,7 +235,7 @@ export class Bot {
       const market = await this.marketStorage.get(poolData.state.marketId.toString());
       const poolKeys: LiquidityPoolKeysV4 = createPoolKeys(new PublicKey(poolData.id), poolData.state, market);
 
-      await this.priceMatch(tokenAmountIn, poolKeys);
+      await this.priceMatch(tokenAmountIn, poolKeys, buyTimestamp);
 
       for (let i = 0; i < this.config.maxSellRetries; i++) {
         try {
@@ -403,23 +403,38 @@ export class Bot {
     return false;
   }
 
-  private async priceMatch(amountIn: TokenAmount, poolKeys: LiquidityPoolKeysV4) {
+  private async takeProfitAmount(amountIn: TokenAmount, poolKeys: LiquidityPoolKeysV4) {
+    poolKeys
+  }
+  private async priceMatch(amountIn: TokenAmount, poolKeys: LiquidityPoolKeysV4, buyTimestamp: number) {
     if (this.config.priceCheckDuration === 0 || this.config.priceCheckInterval === 0) {
       return;
     }
 
     const timesToCheck = this.config.priceCheckDuration / this.config.priceCheckInterval;
-    const profitFraction = this.config.quoteAmount.mul(this.config.takeProfit).numerator.div(new BN(100));
-    const profitAmount = new TokenAmount(this.config.quoteToken, profitFraction, true);
-    const takeProfit = this.config.quoteAmount.add(profitAmount);
-
-    const lossFraction = this.config.quoteAmount.mul(this.config.stopLoss).numerator.div(new BN(100));
-    const lossAmount = new TokenAmount(this.config.quoteToken, lossFraction, true);
-    const stopLoss = this.config.quoteAmount.subtract(lossAmount);
-    const slippage = new Percent(this.config.sellSlippage, 100);
     let timesChecked = 0;
 
     do {
+      // First 4 min, TP 20%, SL 0%
+      // Next 4 min, TP 5%, SL 0%
+      const MIN_4 = 4 * 60;
+      if (buyTimestamp + MIN_4 < new Date().getTime() / 1000) {
+        this.config.takeProfit = 20;
+        this.config.stopLoss = 0;
+      }
+      else {
+        this.config.takeProfit = 20;
+        this.config.stopLoss = 0;
+      }
+      const profitFraction = this.config.quoteAmount.mul(this.config.takeProfit).numerator.div(new BN(100));
+      const profitAmount = new TokenAmount(this.config.quoteToken, profitFraction, true);
+      const takeProfit = this.config.quoteAmount.add(profitAmount);
+
+      const lossFraction = this.config.quoteAmount.mul(this.config.stopLoss).numerator.div(new BN(100));
+      const lossAmount = new TokenAmount(this.config.quoteToken, lossFraction, true);
+      const stopLoss = this.config.quoteAmount.subtract(lossAmount);
+      const slippage = new Percent(this.config.sellSlippage, 100);
+
       try {
         const poolInfo = await Liquidity.fetchInfo({
           connection: this.connection,

@@ -16,10 +16,10 @@ export class AuthBalanceFilter implements Filter {
       const balanceSol = balance / 10 ** 9;
 
       if (balanceSol < Number(this.tokenAuthMinBalanceSol)) {
-        return { ok: false, message: `Pool authority SOL balance too low: ${balanceSol} SOL` };
+        return { ok: false, message: `🔴 Pool authority SOL balance too low: ${balanceSol} < ${this.tokenAuthMinBalanceSol} SOL` };
       }
 
-      return { ok: true, message: `Pool authority SOL balance: ${balanceSol} SOL above ${this.tokenAuthMinBalanceSol}` };
+      return { ok: true, message: `🟢 Pool authority SOL balance: ${balanceSol} > ${this.tokenAuthMinBalanceSol}` };
 
     } catch (e: any) {
       if (e.code == -32602) {
@@ -29,6 +29,6 @@ export class AuthBalanceFilter implements Filter {
       logger.error({ mint: poolKeys.baseMint }, `Failed to check pool authority SOL balance: ${e}`);
     }
 
-    return { ok: false, message: 'Failed to check pool authority SOL balance' };
+    return { ok: false, message: '🔴 Failed to check pool authority SOL balance' };
   }
 }

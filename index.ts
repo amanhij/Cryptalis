@@ -152,7 +152,7 @@ const runListener = async () => {
   logger.info('Bot is starting...');
 
   const marketCache = new MarketCache(connection);
-  const poolCache = new PoolCache();
+  const poolCache = new PoolCache(connection);
   let txExecutor: TransactionExecutor;
 
   switch (TRANSACTION_EXECUTOR) {
@@ -238,19 +238,14 @@ const runListener = async () => {
     }
   });
 
-  // TODO: Don't sell, I'll implement a new strategy that follows price actions
-  // listeners.on('wallet', async (updatedAccountInfo: KeyedAccountInfo) => {
-  //   const accountData = AccountLayout.decode(updatedAccountInfo.accountInfo.data);
-
-  //   if (accountData.mint.equals(quoteToken.mint)) {
-  //     return;
-  //   }
-  //   await bot.sell(updatedAccountInfo.accountId, accountData);
-  // });
-
   listeners.on('wallet', async (updatedAccountInfo: KeyedAccountInfo) => {
-    // Update price feed for the tokens in the wallet
-    updateSubscriptions(botConfig.wallet.publicKey);
+    const accountData = AccountLayout.decode(updatedAccountInfo.accountInfo.data);
+
+    if (accountData.mint.equals(quoteToken.mint)) {
+      return;
+    }
+    const buyTimestamp = new Date().getTime() / 1000;
+    await bot.sell(updatedAccountInfo.accountId, accountData, buyTimestamp);
   });
 
   // Start listeners

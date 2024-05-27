@@ -30,9 +30,8 @@ export class ShyftBurnFilter implements Filter {
 
       //Query the Shyft API to get the pool info
       const info = await shyftQueryLpMintInfo(poolKeys.id.toBase58());
-      const { lpMint } = info.Raydium_LiquidityPoolv4[0]
+      const lpMint = info.Raydium_LiquidityPoolv4[0].lpMint
 
-      logger.debug({ lpMint }, `Fetching Parsed Account Info for...`);
       //Once we have the lpMint address, we need to fetch the current token supply and decimals
       const parsedAccInfo = await this.connection.getParsedAccountInfo(new PublicKey(lpMint));
       // logger.debug({ parsedAccInfo }, `Parsed Account Info for ${lpMint}`);
@@ -43,18 +42,17 @@ export class ShyftBurnFilter implements Filter {
       // @ts-ignore
       const lpReserve = info.Raydium_LiquidityPoolv4[0].lpReserve / Math.pow(10, mintInfo?.decimals)
       const actualSupply = mintInfo?.supply / Math.pow(10, mintInfo?.decimals)
-      logger.debug({ lpMint, lpReserve, actualSupply }, `SHYFT LP Info`);
 
       //Calculate burn percentage
       const burnPct = getBurnPercentage(lpReserve, actualSupply)
 
-      logger.debug({poolId: poolKeys.id, burnPct, burnedPercentageThreshold: this.burnedPercentageThreshold }, `Pool Burn Percentage reported by Shyft`);
 
       if (burnPct > this.burnedPercentageThreshold) {
-        return { ok: true, message: `ShyftBurnFilter -> Burned Percentage ${burnPct} > ${this.burnedPercentageThreshold}` };
+        // logger.debug({ poolId: poolKeys.id, burnPct, burnedPercentageThreshold: this.burnedPercentageThreshold }, `Pool Burn Percentage reported by Shyft`);
+        return { ok: true, message: `🟢ShyftBurnFilter -> Burned Percentage ${burnPct} > ${this.burnedPercentageThreshold}` };
       }
 
-      return { ok: false, message: `ShyftBurnFilter -> Burned Percentage ${burnPct} < ${this.burnedPercentageThreshold}` };
+      return { ok: false, message: `🔴 ShyftBurnFilter -> Burned Percentage ${burnPct} < ${this.burnedPercentageThreshold}` };
 
     } catch (e: any) {
       if (e.code == -32602) {
@@ -64,7 +62,7 @@ export class ShyftBurnFilter implements Filter {
       logger.error({ mint: poolKeys.baseMint, err: e }, `Shyft Failed to check if LP is burned`);
     }
 
-    return { ok: false, message: 'Shyft Failed to check if LP is burned' };
+    return { ok: false, message: '🔴 Shyft Failed to check if LP is burned' };
   }
 }
 

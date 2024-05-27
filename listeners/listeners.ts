@@ -40,7 +40,7 @@ export class Listeners extends EventEmitter {
       this.subscriptions.push(walletSubscription);
     }
 
-    const birdeyeSubscription = await this.subscribeToPriceFeed();
+    // const birdeyeSubscription = await this.subscribeToPriceFeed();
   }
 
   private async subscribeToOpenBookMarkets(config: { quoteToken: Token }) {

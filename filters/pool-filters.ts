@@ -72,9 +72,12 @@ export class PoolFilters {
       return true;
     }
 
-    for (const filterResult of result.filter((r) => !r.ok)) {
+    // for (const filterResult of result.filter((r) => !r.ok)) {
+    logger.trace('🌟🌟🌟🌟🌟🌟🌟 FILTER REPORT 🌟🌟🌟🌟🌟🌟🌟🌟🌟');
+    for (const filterResult of result) {
       logger.trace(filterResult.message);
     }
+    logger.trace('🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬');
 
     return false;
   }
