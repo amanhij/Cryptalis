@@ -1,7 +1,7 @@
 import { Filter, FilterResult } from './pool-filters';
 import { Connection, PublicKey, TokenAccountBalancePair } from '@solana/web3.js';
 import { LiquidityPoolKeysV4 } from '@raydium-io/raydium-sdk';
-import { HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE, logger } from '../helpers';
+import { HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE, TOKEN_PERCENTAGE_ALLOCATED_TO_POOL, logger } from '../helpers';
 
 export class HighOwnershipFilter implements Filter {
 
@@ -25,7 +25,7 @@ export class HighOwnershipFilter implements Filter {
       const percentOfTotalSupplyUsedByPool = baseVaultBalance.value.uiAmount! / totalSupply.value.uiAmount! * 100;
 
       // TODO: use ENV variable not 99.9
-      if (percentOfTotalSupplyUsedByPool < this.tokenPercentageAllocatedToPool) {
+      if (percentOfTotalSupplyUsedByPool < TOKEN_PERCENTAGE_ALLOCATED_TO_POOL) {
         // logger.debug({ 
         //   poolId: poolKeys.id,
         //   mint: poolKeys.baseMint,
@@ -33,7 +33,7 @@ export class HighOwnershipFilter implements Filter {
         //   totalSupplyUi: totalSupply.value.uiAmount,
         //   percentOfTotalSupplyUsedByPool: percentOfTotalSupplyUsedByPool
         // }, `HighOwnershipFilter -> There are ${percentOfTotalSupplyUsedByPool.toFixed(1)}% of total supply used to create the pool.`);
-        return { ok: false, message: `🔴 HighOwnershipFilter -> Only ${percentOfTotalSupplyUsedByPool.toFixed(1)}% of tokens are used to create the pool.` };
+        return { ok: false, message: `🔴 HighOwnershipFilter -> ${percentOfTotalSupplyUsedByPool.toFixed(1)}% of tokens left in the pool.` };
       }
 
 

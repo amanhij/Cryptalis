@@ -2,22 +2,20 @@ import { Big } from 'trading-signals';
 import fs from 'fs';
 
 export type OHLC = { o: Big, h: Big, l: Big, c: Big };
-// Map of Pool Id => Timestamp => Price OHLC
+// Map of Mint => Timestamp => Price OHLC
 let data = new Map<string, Map<number, OHLC>>();
 
-export function setOhlc(poolId: string, timestamp: number, ohlc: OHLC,) {
-  let poolMap = data.get(poolId);
-  if (!poolMap) {
-    data.set(poolId, new Map<number, OHLC>()); // Change the type to Map<number, OHLC>
-    poolMap = data.get(poolId);
+export function setOhlc(mint: string, timestamp: number, ohlc: OHLC,) {
+  let mintMap = data.get(mint);
+  if (!mintMap) {
+    data.set(mint, new Map<number, OHLC>()); // Change the type to Map<number, OHLC>
+    mintMap = data.get(mint);
   }
 
-  const poolPriceMap = poolMap?.get(timestamp);
-  if (!poolPriceMap) {
-    poolMap?.set(timestamp, ohlc);
+  const mintPriceMap = mintMap?.get(timestamp);
+  if (!mintPriceMap) {
+    mintMap?.set(timestamp, ohlc);
   }
-
-  saveDataToFile('price.cache.json', data);
 }
 
 export function getOhlc(poolId: string): Map<number, OHLC> | undefined {

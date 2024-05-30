@@ -232,7 +232,7 @@ const runListener = async () => {
 
     // Pool is created after the bot started
     if (!exists && poolOpenTime > runTimestamp) {
-      logger.debug({accountId: updatedAccountInfo.accountId}, 'A new pool was found.');
+      logger.debug({accountId: updatedAccountInfo.accountId, poolOpenTime: new Date(poolOpenTime * 1000)}, 'A new pool was found.');
       poolCache.save(updatedAccountInfo.accountId.toString(), poolState);
       await bot.buy(updatedAccountInfo.accountId, poolState);
     }
@@ -245,7 +245,13 @@ const runListener = async () => {
       return;
     }
     const buyTimestamp = new Date().getTime() / 1000;
-    await bot.sell(updatedAccountInfo.accountId, accountData, buyTimestamp);
+    // Token sell event, buy again at lower price
+    if (accountData.amount === BigInt(0)) {
+      await bot.buy2(accountData.mint);
+    }
+    else {
+      await bot.sell(updatedAccountInfo.accountId, accountData, buyTimestamp);
+    }
   });
 
   // Start listeners

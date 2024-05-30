@@ -6,20 +6,19 @@ const transport = pino.transport({
     {
       target: 'pino-pretty',
       options: {
-        colorize: true,
+        colorize: false,
+        destination: `./log/bot.${new Date().toISOString().replace('T', ' ').split('.')[0]}.log`,
       },
       level: process.env.LOG_LEVEL || 'info',
     },
     {
-      target: 'pino/file',
+      target: 'pino-pretty',
       options: {
-        destination: `./log/bot.${new Date().toISOString().replace('T', ' ').split('.')[0]}.log`,
-        mkdir: true, // Create the directory if it doesn't exist
-        append: true, // Append to the file if it exists
         colorize: true,
+        destination: process.stdout.fd
       },
       level: process.env.LOG_LEVEL || 'info',
-    }
+    },
   ]
 });
 

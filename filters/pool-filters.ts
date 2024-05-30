@@ -9,6 +9,7 @@ import { HighOwnershipFilter } from './high.ownership.filter';
 import { BURNED_PERCENTAGE_THRESHOLD, CHECK_IF_FREEZABLE, CHECK_IF_MINT_IS_RENOUNCED, CHECK_IF_MUTABLE, CHECK_IF_SOCIALS, HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE, TOKEN_AUTH_MIN_BALANCE_SOL, TOKEN_PERCENTAGE_ALLOCATED_TO_POOL, logger } from '../helpers';
 import { ShyftBurnFilter } from './shyft.burn.filter';
 import { AuthBalanceFilter } from './auth.balance.filter';
+import { PoolCache } from '../cache';
 
 export interface Filter {
   execute(poolKeysV4: LiquidityPoolKeysV4): Promise<FilterResult>;
@@ -31,6 +32,7 @@ export class PoolFilters {
   constructor(
     readonly connection: Connection,
     readonly args: PoolFilterArgs,
+    private readonly poolCache: PoolCache
   ) {
     if (BURNED_PERCENTAGE_THRESHOLD) {
       // this.filters.push(new BurnFilter(connection, BURNED_PERCENTAGE_THRESHOLD));
@@ -50,7 +52,7 @@ export class PoolFilters {
     }
 
     if (HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE) {
-      this.filters.push(new HighOwnershipFilter(connection, TOKEN_PERCENTAGE_ALLOCATED_TO_POOL));
+      this.filters.push(new HighOwnershipFilter(connection, HIGH_OWNERSHIP_THRESHOLD_PERCENTAGE));
     }
 
     if (TOKEN_AUTH_MIN_BALANCE_SOL) {
@@ -73,7 +75,9 @@ export class PoolFilters {
     }
 
     // for (const filterResult of result.filter((r) => !r.ok)) {
-    logger.trace('🌟🌟🌟🌟🌟🌟🌟 FILTER REPORT 🌟🌟🌟🌟🌟🌟🌟🌟🌟');
+    const poolState = await this.poolCache.get(poolKeys.baseMint.toBase58())
+    const { poolOpenTime } = poolState.state
+    logger.trace({ poolId: poolKeys.id.toBase58(), poolOpenTime: new Date(poolOpenTime.muln(1000).toNumber()) }, '🌟🌟🌟🌟🌟🌟🌟 FILTER REPORT 🌟🌟🌟🌟🌟🌟🌟🌟🌟');
     for (const filterResult of result) {
       logger.trace(filterResult.message);
     }

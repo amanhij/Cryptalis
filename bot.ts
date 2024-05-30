@@ -25,6 +25,7 @@ import { Mutex } from 'async-mutex';
 import BN from 'bn.js';
 import { WarpTransactionExecutor } from './transactions/warp-transaction-executor';
 import { JitoTransactionExecutor } from './transactions/jito-rpc-transaction-executor';
+import { setTrade, getTrade, TradeAction } from './cache/trades.cache';
 
 export interface BotConfig {
   wallet: Keypair;
@@ -87,8 +88,10 @@ export class Bot {
     this.poolFilters = new PoolFilters(connection, {
       quoteToken: this.config.quoteToken,
       minPoolSize: this.config.minPoolSize,
-      maxPoolSize: this.config.maxPoolSize,
-    });
+      maxPoolSize: this.config.maxPoolSize
+    },
+      this.poolStorage,
+    );
 
     if (this.config.useSnipeList) {
       this.snipeListCache = new SnipeListCache();
@@ -204,6 +207,87 @@ export class Bot {
     }
   }
 
+  /**
+   * Buy the token when the token price is below the the last sell price
+   * @param accountId 
+   * @param poolState 
+   * @returns 
+   */
+  public async buy2(mint: PublicKey) {
+    const { id, state } = await this.poolStorage.get(mint.toBase58(), true)
+
+    const poolState = state as LiquidityStateV4
+    const poolId = new PublicKey(id)
+
+    try {
+      const [market, mintAta] = await Promise.all([
+        this.marketStorage.get(poolState.marketId.toString()),
+        getAssociatedTokenAddress(poolState.baseMint, this.config.wallet.publicKey),
+      ]);
+      const poolKeys: LiquidityPoolKeysV4 = createPoolKeys(poolId, poolState, market);
+
+      if (!this.config.useSnipeList) {
+        const match = await this.buyBelowTheSellPriceMatch(poolKeys);
+
+        if (!match) {
+          logger.trace({ mint: poolKeys.baseMint.toString() }, `Skipping buy because pool doesn't match filters`);
+          return;
+        }
+        logger.debug({ mint: poolKeys.baseMint.toString(), poolId: poolKeys.id.toString() }, `Pool matched filters`);
+      }
+
+      for (let i = 0; i < this.config.maxBuyRetries; i++) {
+        try {
+          logger.info(
+            { mint: poolState.baseMint.toString() },
+            `Send buy transaction attempt: ${i + 1}/${this.config.maxBuyRetries}`,
+          );
+          const tokenOut = new Token(TOKEN_PROGRAM_ID, poolKeys.baseMint, poolKeys.baseDecimals);
+          const { result } = await this.swap(
+            poolKeys,
+            this.config.quoteAta,
+            mintAta,
+            this.config.quoteToken,
+            tokenOut,
+            this.config.quoteAmount,
+            this.config.buySlippage,
+            this.config.wallet,
+            'buy',
+          );
+
+          if (result.confirmed) {
+            logger.info(
+              {
+                mint: poolState.baseMint.toString(),
+                signature: result.signature,
+                url: `https://solscan.io/tx/${result.signature}?cluster=${NETWORK}`,
+              },
+              `Confirmed buy tx`,
+            );
+
+            break;
+          }
+
+          logger.info(
+            {
+              mint: poolState.baseMint.toString(),
+              signature: result.signature,
+              error: result.error,
+            },
+            `Error confirming buy tx`,
+          );
+        } catch (error) {
+          logger.debug({ mint: poolState.baseMint.toString(), error }, `Error confirming buy transaction`);
+        }
+      }
+    } catch (error) {
+      logger.error({ mint: poolState.baseMint.toString(), error }, `Failed to buy token`);
+    } finally {
+      if (this.config.oneTokenAtATime) {
+        this.mutex.release();
+      }
+    }
+  }
   public async sell(accountId: PublicKey, rawAccount: RawAccount, buyTimestamp: number) {
     if (this.config.oneTokenAtATime) {
       this.sellExecutionCount++;
@@ -257,6 +341,7 @@ export class Bot {
           );
 
           if (result.confirmed) {
+            setTrade(rawAccount.mint.toString(), amountOut.numerator, tokenAmountIn.numerator, TradeAction.Sell);
             logger.info(
               {
                 dex: `https://dexscreener.com/solana/${rawAccount.mint.toString()}?maker=${this.config.wallet.publicKey}`,
@@ -367,6 +452,64 @@ export class Bot {
     }
   }
 
+  //
+  // Check if can buy more tokens with the same amount of quote tokens
+  // from the last sell price
+  //
+  private async buyBelowTheSellPriceMatch(poolKeys: LiquidityPoolKeysV4) {
+    const trade = getTrade(poolKeys.baseMint.toString())
+    if (!trade) {
+      return false;
+    }
+
+    // tokenAmount: Token amount from the last sell
+    // quoteAmount: Quote amount from the last sell
+    const { quoteAmount, tokenAmount } = trade
+
+    const poolInfo = await Liquidity.fetchInfo({
+      connection: this.connection,
+      poolKeys,
+    });
+    const amountIn = new TokenAmount(this.config.quoteToken, quoteAmount, true);
+    const slippage = new Percent(this.config.sellSlippage, 100);
+
+    const amountOut = Liquidity.computeAmountOut({
+      poolKeys,
+      poolInfo,
+      amountIn: amountIn,
+      currencyOut: this.config.quoteToken,
+      slippage,
+    }).amountOut;
+
+    if (amountOut.numerator.gt(tokenAmount)) {
+      logger.debug(
+        {
+          mint: poolKeys.baseMint.toString(),
+          amountOut: amountOut.numerator,
+          lastTrade: {
+            tokenAmount: tokenAmount,
+            quoteAmount: quoteAmount,
+          }
+        },
+        `Can buy more tokens with the same amount of quote tokens`,
+      );
+      return true;
+    }
+
+    logger.debug(
+      {
+        mint: poolKeys.baseMint.toString(),
+        amountOut: amountOut.numerator,
+        lastTrade: {
+          tokenAmount: tokenAmount,
+          quoteAmount: quoteAmount,
+        }
+      },
+      `CANT buy more tokens with the same amount of quote tokens`,
+    );
+    return false;
+  }
+
   private async filterMatch(poolKeys: LiquidityPoolKeysV4) {
     if (this.config.filterCheckInterval === 0 || this.config.filterCheckDuration === 0) {
       return true;
@@ -403,9 +546,6 @@ export class Bot {
     return false;
   }
 
-  private async takeProfitAmount(amountIn: TokenAmount, poolKeys: LiquidityPoolKeysV4) {
-    poolKeys
-  }
   private async priceMatch(amountIn: TokenAmount, poolKeys: LiquidityPoolKeysV4, buyTimestamp: number) {
     if (this.config.priceCheckDuration === 0 || this.config.priceCheckInterval === 0) {
       return;
@@ -419,13 +559,17 @@ export class Bot {
       // Next 4 min, TP 5%, SL 0%
       const MIN_4 = 4 * 60;
       if (buyTimestamp + MIN_4 < new Date().getTime() / 1000) {
-        this.config.takeProfit = 20;
-        this.config.stopLoss = 0;
+        this.config.takeProfit = 5;
+        this.config.stopLoss = 5;
       }
       else {
-        this.config.takeProfit = 20;
-        this.config.stopLoss = 0;
+        this.config.takeProfit = 5;
+        this.config.stopLoss = 5;
       }
+
+      // If the token has purchased before, and reselling after buy
+      const previousTrade = getTrade(poolKeys.baseMint.toString())
+
       const profitFraction = this.config.quoteAmount.mul(this.config.takeProfit).numerator.div(new BN(100));
       const profitAmount = new TokenAmount(this.config.quoteToken, profitFraction, true);
       const takeProfit = this.config.quoteAmount.add(profitAmount);

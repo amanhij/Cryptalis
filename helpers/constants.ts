@@ -13,6 +13,20 @@ const retrieveEnvVariable = (variableName: string, logger: Logger) => {
   return variable;
 };
 
+export interface TpSlConfig {
+  tp: number;
+  sl: number;
+}[];
+
+const parseTpSlConfig = (tpSlConfig: string): TpSlConfig => {
+  try {
+    return JSON.parse(tpSlConfig);
+  } catch (error) {
+    logger.error('Error parsing TP/SL config');
+    process.exit(1);
+  }
+}
+
 export const DEVELOPER_MODE: boolean = retrieveEnvVariable('DEVELOPER_MODE', logger) === 'true';
 
 // Wallet
@@ -55,8 +69,7 @@ export const BUY_SLIPPAGE = Number(retrieveEnvVariable('BUY_SLIPPAGE', logger));
 export const AUTO_SELL = retrieveEnvVariable('AUTO_SELL', logger) === 'true';
 export const AUTO_SELL_DELAY = Number(retrieveEnvVariable('AUTO_SELL_DELAY', logger));
 export const MAX_SELL_RETRIES = Number(retrieveEnvVariable('MAX_SELL_RETRIES', logger));
-export const TAKE_PROFIT = Number(retrieveEnvVariable('TAKE_PROFIT', logger));
-export const STOP_LOSS = Number(retrieveEnvVariable('STOP_LOSS', logger));
+export const TP_SL_CONFIG = parseTpSlConfig(retrieveEnvVariable('TP_SL_CONFIG', logger));
 export const PRICE_CHECK_INTERVAL = Number(retrieveEnvVariable('PRICE_CHECK_INTERVAL', logger));
 export const PRICE_CHECK_DURATION = Number(retrieveEnvVariable('PRICE_CHECK_DURATION', logger));
 export const SELL_SLIPPAGE = Number(retrieveEnvVariable('SELL_SLIPPAGE', logger));
